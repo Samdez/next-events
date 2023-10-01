@@ -72,6 +72,44 @@ export const contentTypes = {
             },
 
             /**
+             * Sold Out (multiple_choice)
+             */
+            sold_out: {
+                codename: 'sold_out',
+                id: 'cf91fb2b-3773-47b5-bcca-766235eb4834',
+                externalId: undefined,
+                name: 'Sold Out',
+                required: false,
+                type: 'multiple_choice',
+                options: {
+                    yes: {
+                        name: 'Yes',
+                        id: 'aabbb11e-3c72-448a-aff5-3fbec474e59a',
+                        codename: 'yes',
+                        externalId: undefined
+                    },
+                    no: {
+                        name: 'No',
+                        id: 'bd3f7a0a-06a1-4f8a-859f-4e7317b0cfb4',
+                        codename: 'no',
+                        externalId: undefined
+                    }
+                }
+            },
+
+            /**
+             * Ticketing url (text)
+             */
+            ticketing_url: {
+                codename: 'ticketing_url',
+                id: 'd5f9e5b7-721b-4326-b19d-eade593a997b',
+                externalId: undefined,
+                name: 'Ticketing url',
+                required: false,
+                type: 'text'
+            },
+
+            /**
              * Title (text)
              */
             title: {

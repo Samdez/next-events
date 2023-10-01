@@ -50,6 +50,22 @@ export type Event = IContentItem<{
     price: Elements.NumberElement;
 
     /**
+     * Sold Out (multiple_choice)
+     * Required: false
+     * Id: cf91fb2b-3773-47b5-bcca-766235eb4834
+     * Codename: sold_out
+     */
+    sold_out: Elements.MultipleChoiceElement;
+
+    /**
+     * Ticketing url (text)
+     * Required: false
+     * Id: d5f9e5b7-721b-4326-b19d-eade593a997b
+     * Codename: ticketing_url
+     */
+    ticketing_url: Elements.TextElement;
+
+    /**
      * Title (text)
      * Required: true
      * Id: 7e29f745-bf67-4ad8-8682-c4b388f5e1b5

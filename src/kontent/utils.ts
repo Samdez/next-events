@@ -20,3 +20,10 @@ export async function getEvents() {
 
 	return res.data;
 }
+
+export async function getEvent(codename: string) {
+	const client = initClient();
+	const res = await client.item<Event>(codename).toPromise();
+
+	return res.data;
+}

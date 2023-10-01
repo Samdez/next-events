@@ -6,7 +6,7 @@ export default async function Home() {
 
 	return (
 		<main className="p-8">
-			<div className="flex gap-8">
+			<div className="flex gap-8 justify-around flex-wrap">
 				{events.map(event => {
 					return <EventCard event={event} key={event.system.id} />;
 				})}
