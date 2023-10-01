@@ -14,6 +14,8 @@ export async function getEvents() {
 	const res = await client
 		.items<Event>()
 		.type(contentTypes.event.codename)
+		.greaterThanFilter("elements.date", new Date().toISOString())
+		.orderByAscending("elements.date")
 		.toPromise();
 
 	return res.data;
