@@ -1,14 +1,14 @@
-import { getArticles } from "../kontent/utils";
+import { getEvents } from "../kontent/utils";
 
 export default async function Home() {
-	const { items: articles } = await getArticles();
+	const { items: events } = await getEvents();
 
 	return (
 		<main>
-			{articles.map(article => {
+			{events.map(({ elements, system }) => {
 				return (
-					<div key={article.system.id}>
-						<h1>{article.elements.title.value}</h1>
+					<div key={system.id}>
+						<h1>{elements.title.value}</h1>
 					</div>
 				);
 			})}

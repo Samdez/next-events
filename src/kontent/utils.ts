@@ -1,7 +1,7 @@
 import { env } from "@/src/env";
 import { createDeliveryClient } from "@kontent-ai/delivery-sdk";
-import { contentTypes } from "./project";
-import { Article } from "./content-types";
+import { Event } from "@/content-types";
+import { contentTypes } from "@/project";
 
 function initClient() {
 	return createDeliveryClient({
@@ -9,11 +9,11 @@ function initClient() {
 	});
 }
 
-export async function getArticles() {
+export async function getEvents() {
 	const client = initClient();
 	const res = await client
-		.items<Article>()
-		.type(contentTypes.article.codename)
+		.items<Event>()
+		.type(contentTypes.event.codename)
 		.toPromise();
 
 	return res.data;
