@@ -13,7 +13,9 @@ function Navbar() {
       <h1 className='w-10/12 text-center text-3xl font-bold'>
         <Link href={'/'}>Goazen!</Link>
       </h1>
-      <UserIcon />
+      <div className='w-32 px-8'>
+        <UserIcon />
+      </div>
     </div>
   );
 }

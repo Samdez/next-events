@@ -9,8 +9,19 @@ function initClient() {
   });
 }
 
-export async function getEvents() {
+export async function getEvents(startDate?: string, endDate?: string) {
   const client = initClient();
+  if (startDate && endDate) {
+    const res = await client
+      .items<Event>()
+      .type(contentTypes.event.codename)
+      .greaterThanFilter('elements.date', startDate)
+      .lessThanFilter('elements.date', endDate)
+      .orderByAscending('elements.date')
+      .toPromise();
+
+    return res.data;
+  }
   const res = await client
     .items<Event>()
     .type(contentTypes.event.codename)
