@@ -22,11 +22,21 @@ export default async function Home({
   return (
     <>
       <FilterSection isActive={isActive} />
-      <div className='flex flex-wrap justify-around gap-8'>
-        {events.map((event) => {
-          return <EventCard event={event} key={event.system.id} />;
-        })}
-      </div>
+      {events.length ? (
+        <div className='flex flex-wrap justify-around gap-8'>
+          {events.map((event) => {
+            return <EventCard event={event} key={event.system.id} />;
+          })}
+        </div>
+      ) : (
+        <div className='flex h-96 flex-col items-center justify-center'>
+          <p className='p-8 text-xl text-secondary'>
+            Rien de prévu {isActive === 'day' ? 'ce soir' : 'cette semaine'},
+            une tisane et au lit! <br />
+          </p>
+          <p className='text-4xl'>😴</p>
+        </div>
+      )}
     </>
   );
 }
