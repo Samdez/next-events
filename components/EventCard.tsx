@@ -19,12 +19,13 @@ function EventCard({ event }: { event: Event }) {
           <CardTitle>{event.elements.title.value}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className='flex justify-center'>
+          <div className='flex justify-center overflow-hidden rounded-lg'>
             <Image
               alt='event picture'
               src={event.elements.image.value[0].url}
               width={256}
               height={256}
+              className='transition hover:scale-110'
             />
           </div>
           <CardDescription className='p-4 text-center text-xl font-bold'>
