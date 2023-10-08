@@ -9,11 +9,15 @@ function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
     return new Date(date.setDate(lastday)).toISOString();
   }
 
+  let tomorrow = new Date(
+    new Date().setDate(new Date().getDate() + 1)
+  ).toISOString();
+
   function createHref(input: 'day' | 'week') {
     if (isActive === input) return '/';
     if (!isActive) {
       if (input === 'day')
-        return `?startDate=${today}&endDate=${today}&isActive=day`;
+        return `?startDate=${today}&endDate=${tomorrow}&isActive=day`;
       if (input === 'week') {
         return `?startDate=${today}&endDate=${getEndOfWeek(
           new Date()
@@ -29,7 +33,7 @@ function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
     }
     if (isActive === 'week') {
       if (input === 'day') {
-        return `?startDate=${today}&endDate=${today}&isActive=day`;
+        return `?startDate=${today}&endDate=${tomorrow}&isActive=day`;
       }
     }
     return '/';
