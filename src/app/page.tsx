@@ -1,6 +1,6 @@
 import EventCard from '@/components/EventCard';
-import { getEvents } from '../kontent/utils';
 import FilterSection from '@/components/FilterSection';
+import { getEvents } from '@/kontent/utils';
 import { z } from 'zod';
 
 const searchParamsSchema = z.object({

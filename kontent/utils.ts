@@ -1,7 +1,7 @@
-import { env } from '@/src/env';
+import { env } from '@/env';
 import { createDeliveryClient } from '@kontent-ai/delivery-sdk';
-import { Event } from '@/content-types';
-import { contentTypes } from '@/project';
+import { Event } from '@/kontent/content-types';
+import { contentTypes } from '@/kontent/project';
 
 function initClient() {
   return createDeliveryClient({

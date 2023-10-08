@@ -6,6 +6,8 @@ export const env = createEnv({
     KONTENT_ENVIRONMENT_ID: z.string(),
     KONTENT_MANAGEMENT_API_KEY: z.string(),
     CLERK_SECRET_KEY: z.string(),
+    DATABASE_URL: z.string(),
+    DATABASE_TOKEN: z.string(),
   },
   client: {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
@@ -26,5 +28,7 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
     NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL:
       process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
+    DATABASE_URL: process.env.DATABASE_URL,
+    DATABASE_TOKEN: process.env.DATABASE_TOKEN,
   },
 });
