@@ -8,6 +8,20 @@
       "when": 1696534790655,
       "tag": "0000_aspiring_stick",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1696795530824,
+      "tag": "0001_furry_riptide",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1696796250090,
+      "tag": "0002_ambiguous_stephen_strange",
+      "breakpoints": true
     }
   ]
 }
