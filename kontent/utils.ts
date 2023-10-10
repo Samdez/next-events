@@ -1,7 +1,7 @@
-import { env } from '@/src/env';
+import { env } from '@/env';
 import { createDeliveryClient } from '@kontent-ai/delivery-sdk';
-import { Event } from '@/content-types';
-import { contentTypes } from '@/project';
+import { Event } from '@/kontent/content-types';
+import { contentTypes } from '@/kontent/project';
 
 function initClient() {
   return createDeliveryClient({
@@ -15,8 +15,8 @@ export async function getEvents(startDate?: string, endDate?: string) {
     const res = await client
       .items<Event>()
       .type(contentTypes.event.codename)
-      .greaterThanFilter('elements.date', startDate)
-      .lessThanFilter('elements.date', endDate)
+      .greaterThanOrEqualFilter('elements.date', startDate.split('T')[0])
+      .lessThanFilter('elements.date', endDate.split('T')[0])
       .orderByAscending('elements.date')
       .toPromise();
 
@@ -25,7 +25,7 @@ export async function getEvents(startDate?: string, endDate?: string) {
   const res = await client
     .items<Event>()
     .type(contentTypes.event.codename)
-    .greaterThanFilter('elements.date', new Date().toISOString())
+    .greaterThanOrEqualFilter('elements.date', new Date().toISOString())
     .orderByAscending('elements.date')
     .toPromise();
 

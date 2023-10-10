@@ -1,5 +1,5 @@
+import { Event } from '../kontent/content-types/event';
 import Image from 'next/image';
-import { Event } from '..';
 import {
   Card,
   CardContent,
