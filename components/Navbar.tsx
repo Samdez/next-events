@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import HomeIcon from './ui/icons/home';
-import { SignInButton, SignUpButton, UserButton, useUser } from '@clerk/nextjs';
+import { SignInButton, UserButton, useUser } from '@clerk/nextjs';
 import { Button } from './ui/button';
 
 function Navbar() {
