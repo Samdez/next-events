@@ -1,19 +1,30 @@
+'use client';
+
 import EventCard from './EventCard';
 import { Event } from '@/kontent/content-types';
+import { useQuery } from 'react-query';
 
 function EventsGrid({
   events,
   isActive,
   isCalendarPage,
-  favorites,
   userId,
 }: {
   events: Event[];
   isActive?: string;
   isCalendarPage: boolean;
-  favorites: string[];
   userId?: string | null;
 }) {
+  const { isLoading, data } = useQuery({
+    queryKey: ['favorites'],
+    queryFn: async () =>
+      fetch(`/api/favorites?userId=${userId}`, {
+        next: { tags: ['favorites'] },
+      }).then((res) => res.json()),
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+
   return events.length ? (
     <div className='flex flex-wrap justify-around gap-8'>
       {events.map((event) => {
@@ -21,7 +32,7 @@ function EventsGrid({
           <EventCard
             event={event}
             key={event.system.id}
-            isFavorite={favorites?.includes(event.system.codename) || false}
+            isFavorite={data.data.includes(event.system.codename) || false}
             userId={userId}
           />
         );

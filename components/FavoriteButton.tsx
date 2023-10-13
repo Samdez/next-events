@@ -4,6 +4,7 @@ import { Star } from 'lucide-react';
 import { Button } from './ui/button';
 import { Event } from '..';
 import { useRouter } from 'next/navigation';
+import { useMutation, useQueryClient } from 'react-query';
 
 function FavoriteButton({
   isFavorite,
@@ -15,16 +16,23 @@ function FavoriteButton({
   userId?: string | null;
 }) {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
-  async function handleClick() {
-    if (isFavorite) {
+  const deleteFavoriteMutation = useMutation({
+    mutationFn: async () => {
       await fetch(
         `api/favorites?eventCodename=${event.system.codename}&userId=${userId}`,
         {
           method: 'DELETE',
         }
       );
-    } else {
+      await queryClient.invalidateQueries({
+        queryKey: ['favorites'],
+      });
+    },
+  });
+  const createFavoriteMutation = useMutation({
+    mutationFn: async () => {
       await fetch(`api/favorites`, {
         method: 'POST',
         body: JSON.stringify({
@@ -32,8 +40,17 @@ function FavoriteButton({
           eventCodename: event.system.codename,
         }),
       });
+      await queryClient.invalidateQueries({
+        queryKey: ['favorites'],
+      });
+    },
+  });
+  async function handleClick() {
+    if (isFavorite) {
+      deleteFavoriteMutation.mutate();
+    } else {
+      createFavoriteMutation.mutate();
     }
-    router.refresh();
   }
 
   return (

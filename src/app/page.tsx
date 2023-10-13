@@ -1,8 +1,6 @@
-import EventCard from '@/components/EventCard';
 import FilterSection from '@/components/FilterSection';
 import { getEvents } from '@/kontent/utils';
 import { z } from 'zod';
-import { getFavorites } from '../db/utils';
 import { auth } from '@clerk/nextjs';
 import EventsGrid from '@/components/EventsGrid';
 
@@ -22,18 +20,12 @@ export default async function Home({
     searchParamsSchema.parse(searchParams);
 
   const { items: events } = await getEvents(startDate, endDate);
-  const favorites = userId && (await getFavorites(userId));
 
   return (
     <>
       <FilterSection isActive={isActive} />
       {events.length ? (
-        <EventsGrid
-          events={events}
-          isCalendarPage={false}
-          favorites={favorites || []}
-          userId={userId}
-        />
+        <EventsGrid events={events} isCalendarPage={false} userId={userId} />
       ) : (
         <div className='flex h-96 flex-col items-center justify-center'>
           <p className='p-8 text-xl text-secondary'>

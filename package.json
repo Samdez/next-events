@@ -31,6 +31,7 @@
     "react": "latest",
     "react-day-picker": "^8.8.2",
     "react-dom": "latest",
+    "react-query": "^3.39.3",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.2"
