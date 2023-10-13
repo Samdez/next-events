@@ -12,6 +12,7 @@ const nextConfig = {
   },
   experimental: {
     serverComponentsExternalPackages: ['@libsql/client'],
+    serverActions: true,
   },
 };
 

@@ -2,6 +2,9 @@ import EventCard from '@/components/EventCard';
 import FilterSection from '@/components/FilterSection';
 import { getEvents } from '@/kontent/utils';
 import { z } from 'zod';
+import { getFavorites } from '../db/utils';
+import { auth } from '@clerk/nextjs';
+import EventsGrid from '@/components/EventsGrid';
 
 const searchParamsSchema = z.object({
   startDate: z.string().datetime().optional(),
@@ -14,20 +17,23 @@ export default async function Home({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  const { userId } = auth();
   const { isActive, startDate, endDate } =
     searchParamsSchema.parse(searchParams);
 
   const { items: events } = await getEvents(startDate, endDate);
+  const favorites = userId && (await getFavorites(userId));
 
   return (
     <>
       <FilterSection isActive={isActive} />
       {events.length ? (
-        <div className='flex flex-wrap justify-around gap-8'>
-          {events.map((event) => {
-            return <EventCard event={event} key={event.system.id} />;
-          })}
-        </div>
+        <EventsGrid
+          events={events}
+          isCalendarPage={false}
+          favorites={favorites || []}
+          userId={userId}
+        />
       ) : (
         <div className='flex h-96 flex-col items-center justify-center'>
           <p className='p-8 text-xl text-secondary'>

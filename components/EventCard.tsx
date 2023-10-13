@@ -10,11 +10,20 @@ import {
 } from './ui/card';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import FavoriteButton from './FavoriteButton';
 
-function EventCard({ event }: { event: Event }) {
+function EventCard({
+  event,
+  isFavorite,
+  userId,
+}: {
+  event: Event;
+  isFavorite: boolean;
+  userId?: string | null;
+}) {
   return (
-    <Link href={`/events/${event.system.codename}`}>
-      <Card className='flex flex-col items-center  border-none'>
+    <Card className='flex flex-col items-center  border-none'>
+      <Link href={`/events/${event.system.codename}`}>
         <CardHeader>
           <CardTitle>{event.elements.title.value}</CardTitle>
         </CardHeader>
@@ -35,7 +44,9 @@ function EventCard({ event }: { event: Event }) {
             {new Date(event.elements.date.value!).toLocaleDateString('fr-FR')}
           </CardDescription>
         </CardContent>
-        <CardFooter>
+      </Link>
+      <CardFooter className='flex w-full cursor-default justify-around'>
+        <Link href={`/events/${event.system.codename}`}>
           <Button>
             {' '}
             {event.elements.sold_out.value[0]?.codename === 'yes' ? (
@@ -48,9 +59,10 @@ function EventCard({ event }: { event: Event }) {
               </p>
             )}{' '}
           </Button>
-        </CardFooter>
-      </Card>
-    </Link>
+        </Link>
+        <FavoriteButton isFavorite={isFavorite} event={event} userId={userId} />
+      </CardFooter>
+    </Card>
   );
 }
 
