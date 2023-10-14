@@ -5,13 +5,14 @@ import { eq } from 'drizzle-orm';
 
 export async function POST(request: Request) {
   const { data, message } = (await request.json()) as IWebhookDeliveryResponse;
-
-  switch (message.operation) {
-    case 'publish': {
-      return createEvent(data);
-    }
-    case 'unpublish': {
-      return deleteEvent(data);
+  if (data.items[0].type === 'event') {
+    switch (message.operation) {
+      case 'publish': {
+        return createEvent(data);
+      }
+      case 'unpublish': {
+        return deleteEvent(data);
+      }
     }
   }
 }
