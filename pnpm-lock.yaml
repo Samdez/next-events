@@ -17,6 +17,9 @@ dependencies:
   '@kontent-ai/model-generator':
     specifier: ^6.5.0
     version: 6.5.0
+  '@kontent-ai/webhook-helper':
+    specifier: ^2.1.0
+    version: 2.1.0
   '@libsql/client':
     specifier: ^0.3.5
     version: 0.3.5
@@ -639,6 +642,11 @@ packages:
       yargs: 17.7.2
     transitivePeerDependencies:
       - debug
+    dev: false
+
+  /@kontent-ai/webhook-helper@2.1.0:
+    resolution: {integrity: sha512-J6CiHM/7PUrRNNZeh0I46iQmyHgKt2qo3aJ0BAMwHuBrmwxIoU7aWOfk1Xi4AiPJaabbq0+qMIutQuSBLoWXkA==}
+    engines: {node: '>= 16'}
     dev: false
 
   /@libsql/client@0.3.5:
