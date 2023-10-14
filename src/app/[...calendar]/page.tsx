@@ -15,7 +15,7 @@ const defaultSelected: DateRange = {
   to: new Date(),
 };
 
-export function CalendarSection() {
+function CalendarSection() {
   const { userId } = useAuth();
   const [range, setRange] = useState<DateRange | undefined>(defaultSelected);
   const [events, setEvents] = useState<Event[] | null>(null);
