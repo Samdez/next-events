@@ -5,6 +5,7 @@ import { Button } from './ui/button';
 import { Event } from '..';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from 'react-query';
+import { useAuth } from '@clerk/nextjs';
 
 function FavoriteButton({
   isFavorite,
@@ -16,6 +17,7 @@ function FavoriteButton({
   userId?: string | null;
 }) {
   const router = useRouter();
+  const { isSignedIn } = useAuth();
   const queryClient = useQueryClient();
 
   const deleteFavoriteMutation = useMutation({
@@ -46,6 +48,7 @@ function FavoriteButton({
     },
   });
   async function handleClick() {
+    if (!isSignedIn) router.push('/sign-in');
     if (isFavorite) {
       deleteFavoriteMutation.mutate();
     } else {

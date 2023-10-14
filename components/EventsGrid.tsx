@@ -32,7 +32,7 @@ function EventsGrid({
           <EventCard
             event={event}
             key={event.system.id}
-            isFavorite={data.data.includes(event.system.codename) || false}
+            isFavorite={data?.data.includes(event.system.codename) || false}
             userId={userId}
           />
         );
