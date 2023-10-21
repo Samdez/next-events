@@ -15,6 +15,12 @@ export async function POST(request: Request) {
       }
     }
   }
+  return new Response(
+    `Item type ${data.items[0].type} doesn't require webhook handling`,
+    {
+      status: 200,
+    }
+  );
 }
 
 async function createEvent(data: IWebhookDeliveryResponse['data']) {
