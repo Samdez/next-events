@@ -40,7 +40,7 @@ function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
 
   return (
     <>
-      <div className='flex items-center justify-center gap-4 p-8'>
+      <div className='flex flex-wrap items-center justify-center gap-4 p-8'>
         <Link href={createHref('week')} replace>
           <Button
             className={`w-36 border-2 border-secondary  hover:bg-secondary hover:text-primary ${

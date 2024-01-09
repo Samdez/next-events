@@ -8,11 +8,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**',
       },
+      {
+        protocol: 'http',
+        hostname: '**',
+      },
     ],
   },
   experimental: {
     serverComponentsExternalPackages: ['@libsql/client'],
-    serverActions: true,
   },
 };
 

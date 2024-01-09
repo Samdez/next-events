@@ -1,8 +1,8 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import EventCard from './EventCard';
-import { Event } from '@/kontent/content-types';
-import { useQuery } from 'react-query';
+import { Event } from '@/src/app/types/Event';
 
 function EventsGrid({
   events,
@@ -24,6 +24,7 @@ function EventsGrid({
   });
 
   if (isLoading) return <div>Loading...</div>;
+  console.log(events);
 
   return events.length ? (
     <div className='flex flex-wrap justify-around gap-8'>
@@ -31,8 +32,8 @@ function EventsGrid({
         return (
           <EventCard
             event={event}
-            key={event.system.id}
-            isFavorite={data?.data.includes(event.system.codename) || false}
+            key={event.id}
+            isFavorite={data?.data.includes(event.id) || false}
             userId={userId}
           />
         );

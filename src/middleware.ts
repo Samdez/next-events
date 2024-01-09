@@ -10,7 +10,7 @@ export default authMiddleware({
     '/events/:codename',
     '/calendar',
     '/api/webhooks/clerk',
-    '/api/webhooks/kontent',
+    '/api/webhooks/payload',
     '/api/calendar',
   ],
 });

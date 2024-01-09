@@ -4,8 +4,8 @@ import { Star } from 'lucide-react';
 import { Button } from './ui/button';
 import { Event } from '..';
 import { useRouter } from 'next/navigation';
-import { useMutation, useQueryClient } from 'react-query';
 import { useAuth } from '@clerk/nextjs';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 function FavoriteButton({
   isFavorite,
