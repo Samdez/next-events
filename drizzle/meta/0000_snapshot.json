@@ -1,14 +1,14 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "001a282c-1de4-4774-af5c-c53d6f07aacb",
+  "id": "25ee7b4c-0be4-4519-a178-d6388be5704b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "events": {
       "name": "events",
       "columns": {
-        "codename": {
-          "name": "codename",
+        "id": {
+          "name": "id",
           "type": "text",
           "primaryKey": true,
           "notNull": true,
@@ -28,6 +28,21 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true,
+          "autoincrement": false
+        },
+        "active": {
+          "name": "active",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         }
       },
@@ -69,15 +84,15 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "users_events_eventCodename_events_codename_fk": {
-          "name": "users_events_eventCodename_events_codename_fk",
+        "users_events_eventCodename_events_id_fk": {
+          "name": "users_events_eventCodename_events_id_fk",
           "tableFrom": "users_events",
           "tableTo": "events",
           "columnsFrom": [
             "eventCodename"
           ],
           "columnsTo": [
-            "codename"
+            "id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -88,7 +103,8 @@
           "columns": [
             "eventCodename",
             "userId"
-          ]
+          ],
+          "name": "users_events_userId_eventCodename_pk"
         }
       },
       "uniqueConstraints": {}

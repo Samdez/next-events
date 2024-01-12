@@ -1,6 +1,6 @@
-import { getEvents } from '@/kontent/utils';
 import { NextRequest } from 'next/server';
 import { z } from 'zod';
+import { getEvents } from '../../queries';
 
 const searchParamsSchema = z.object({
   startDate: z.string().datetime().optional(),

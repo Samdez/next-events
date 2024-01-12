@@ -1,14 +1,14 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "6ad9ec6b-0911-492f-973d-0499a2953ce8",
-  "prevId": "001a282c-1de4-4774-af5c-c53d6f07aacb",
+  "id": "832127a1-0a65-4816-ac75-69a2de28f241",
+  "prevId": "25ee7b4c-0be4-4519-a178-d6388be5704b",
   "tables": {
     "events": {
       "name": "events",
       "columns": {
-        "codename": {
-          "name": "codename",
+        "id": {
+          "name": "id",
           "type": "text",
           "primaryKey": true,
           "notNull": true,
@@ -35,6 +35,14 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
+          "autoincrement": false,
+          "default": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         }
       },
@@ -53,8 +61,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "eventCodename": {
-          "name": "eventCodename",
+        "eventId": {
+          "name": "eventId",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -76,26 +84,27 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "users_events_eventCodename_events_codename_fk": {
-          "name": "users_events_eventCodename_events_codename_fk",
+        "users_events_eventId_events_id_fk": {
+          "name": "users_events_eventId_events_id_fk",
           "tableFrom": "users_events",
           "tableTo": "events",
           "columnsFrom": [
-            "eventCodename"
+            "eventId"
           ],
           "columnsTo": [
-            "codename"
+            "id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
-        "users_events_userId_eventCodename_pk": {
+        "users_events_userId_eventId_pk": {
           "columns": [
-            "eventCodename",
+            "eventId",
             "userId"
-          ]
+          ],
+          "name": "users_events_userId_eventId_pk"
         }
       },
       "uniqueConstraints": {}
@@ -105,6 +114,8 @@
   "_meta": {
     "schemas": {},
     "tables": {},
-    "columns": {}
+    "columns": {
+      "\"users_events\".\"eventCodename\"": "\"users_events\".\"eventId\""
+    }
   }
 }

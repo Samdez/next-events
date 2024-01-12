@@ -27,17 +27,17 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const req = await request.json();
   const schema = z.object({
-    eventCodename: z.string(),
+    eventId: z.string(),
     userId: z.string(),
   });
   const data = schema.parse({
-    eventCodename: req.eventCodename,
+    eventId: req.eventId,
     userId: req.userId,
   });
 
   try {
     await db.insert(usersOnEvents).values({
-      eventCodename: data.eventCodename,
+      eventId: data.eventId,
       userId: data.userId,
     });
 
@@ -51,13 +51,13 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const userId = request.nextUrl.searchParams.get('userId');
-  const eventCodename = request.nextUrl.searchParams.get('eventCodename');
+  const eventId = request.nextUrl.searchParams.get('eventId');
   const schema = z.object({
-    eventCodename: z.string(),
+    eventId: z.string(),
     userId: z.string(),
   });
   const data = schema.parse({
-    eventCodename,
+    eventId,
     userId,
   });
 
@@ -66,7 +66,7 @@ export async function DELETE(request: NextRequest) {
       .delete(usersOnEvents)
       .where(
         and(
-          eq(usersOnEvents.eventCodename, data.eventCodename),
+          eq(usersOnEvents.eventId, data.eventId),
           eq(usersOnEvents.userId, data.userId)
         )
       );
