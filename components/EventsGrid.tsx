@@ -24,7 +24,6 @@ function EventsGrid({
   });
 
   if (isLoading) return <div>Loading...</div>;
-  console.log(events);
 
   return events.length ? (
     <div className='flex flex-wrap justify-around gap-8'>
@@ -46,8 +45,8 @@ function EventsGrid({
         {isCalendarPage
           ? 'sur cette période'
           : isActive === 'day'
-          ? 'ce soir'
-          : 'cette semaine'}
+            ? 'ce soir'
+            : 'cette semaine'}
         , une tisane et au lit! <br />
       </p>
       <p className='text-4xl'>😴</p>

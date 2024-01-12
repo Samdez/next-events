@@ -17,8 +17,6 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   const req = (await request.json()) as DeleteRequestBody;
 
-  console.log('EVENT ID', req.eventId, '659db6b0b9bd9d74667440f6');
-
   return deleteEvent(req.eventId);
 }
 

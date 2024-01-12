@@ -6,12 +6,12 @@ export async function getFavorites(id: string) {
   const res = await db.query.usersOnEvents.findMany({
     where: eq(usersOnEvents.userId, id),
   });
-  return res.map((el) => el.eventCodename);
+  return res.map((el) => el.eventId);
 }
 
-export async function addFavorite(userId: string, eventCodename: string) {
+export async function addFavorite(userId: string, eventId: string) {
   db.insert(usersOnEvents).values({
-    eventCodename,
+    eventId,
     userId,
   });
 }

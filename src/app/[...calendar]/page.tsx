@@ -3,9 +3,9 @@
 import { Calendar } from '@/components/ui/calendar';
 import { useEffect, useState } from 'react';
 import { DateRange } from 'react-day-picker';
-import { Event } from '@/kontent/content-types';
 import EventsGrid from '@/components/EventsGrid';
 import { useAuth } from '@clerk/nextjs';
+import { Event } from '../types/Event';
 
 let d = new Date();
 d.setMonth(d.getMonth() + 1);

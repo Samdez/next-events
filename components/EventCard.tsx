@@ -27,8 +27,6 @@ function EventCard({
   const imageUrl =
     !(typeof event.image === 'string') && event.image ? event.image?.url : '';
 
-  console.log(`${env.NEXT_PUBLIC_PAYLOAD_URL}${imageUrl}`);
-
   return (
     <Card className='flex flex-col items-center  border-none'>
       <Link href={`/events/${event.id}`}>

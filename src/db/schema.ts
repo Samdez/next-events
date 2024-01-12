@@ -22,12 +22,12 @@ export const usersOnEvents = sqliteTable(
     userId: text('userId')
       .notNull()
       .references(() => users.id),
-    eventCodename: text('eventCodename')
+    eventId: text('eventId')
       .notNull()
       .references(() => events.id),
   },
   (t) => ({
-    pk: primaryKey(t.userId, t.eventCodename),
+    pk: primaryKey({ columns: [t.userId, t.eventId] }),
   })
 );
 
@@ -42,7 +42,7 @@ export const eventRelations = relations(events, ({ many }) => ({
 export const usersOnEventsRelations = relations(usersOnEvents, ({ one }) => ({
   user: one(users, { fields: [usersOnEvents.userId], references: [users.id] }),
   event: one(events, {
-    fields: [usersOnEvents.eventCodename],
+    fields: [usersOnEvents.eventId],
     references: [events.id],
   }),
 }));

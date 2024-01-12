@@ -7,7 +7,7 @@ export default authMiddleware({
   // "/" will be accessible to all users
   publicRoutes: [
     '/',
-    '/events/:codename',
+    '/events/:id',
     '/calendar',
     '/api/webhooks/clerk',
     '/api/webhooks/payload',
