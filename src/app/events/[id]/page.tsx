@@ -2,9 +2,15 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getEvent } from '../../queries';
+import { env } from '@/env';
 
 async function EventPage({ params }: { params: { id: string } }) {
   const event = await getEvent(params.id);
+  console.log('🚀 ~ EventPage ~ event:', event);
+  const imageUrl =
+    !(typeof event.image === 'string') && event.image ? event.image?.url : '';
+  const imageTitle =
+    !(typeof event.image === 'string') && event.image ? event.image?.title : '';
 
   return (
     <div className='flex flex-col items-center text-white'>
@@ -16,8 +22,8 @@ async function EventPage({ params }: { params: { id: string } }) {
       </div>
       <Image
         className='mx-auto py-10'
-        src={event.image?.toString() || ''}
-        alt={event.image?.toString() || event.title}
+        src={`${env.NEXT_PUBLIC_PAYLOAD_URL}${imageUrl}` || ''}
+        alt={imageTitle}
         width={640}
         height={640}
       />

@@ -26,6 +26,8 @@ function EventCard({
     !(typeof event.location === 'string') && event.location.name;
   const imageUrl =
     !(typeof event.image === 'string') && event.image ? event.image?.url : '';
+  const imageTitle =
+    !(typeof event.image === 'string') && event.image ? event.image?.title : '';
 
   return (
     <Card className='flex flex-col items-center  border-none'>
@@ -36,7 +38,7 @@ function EventCard({
         <CardContent>
           <div className='flex justify-center overflow-hidden rounded-lg'>
             <Image
-              alt='event picture'
+              alt={imageTitle}
               src={`${env.NEXT_PUBLIC_PAYLOAD_URL}${imageUrl}` || ''}
               width={256}
               height={256}

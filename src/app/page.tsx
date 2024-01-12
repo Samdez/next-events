@@ -16,8 +16,11 @@ export default async function Home({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const { userId } = auth();
-  const { isActive, startDate, endDate } =
-    searchParamsSchema.parse(searchParams);
+  const {
+    isActive,
+    startDate = new Date().toISOString(),
+    endDate,
+  } = searchParamsSchema.parse(searchParams);
 
   const events = await getEvents(startDate, endDate);
 
