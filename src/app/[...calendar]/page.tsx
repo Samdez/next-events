@@ -26,8 +26,9 @@ function CalendarSection() {
         next: { tags: ['events'] },
       })
         .then((res) => res.json())
-        .then((res) => setEvents(res.data.items));
+        .then((res) => setEvents(res.data));
     }
+    setEvents([]);
   }, [range]);
 
   return (
@@ -40,7 +41,7 @@ function CalendarSection() {
           className='rounded-lg border bg-secondary text-primary'
         />
       </div>
-      {events && (
+      {events?.length && (
         <EventsGrid events={events} isCalendarPage={true} userId={userId} />
       )}
     </>
