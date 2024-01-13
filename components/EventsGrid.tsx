@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import EventCard from './EventCard';
 import { Event } from '@/src/app/types/Event';
+import EmptyEventsSection from './EmptyEventsSection';
 
 function EventsGrid({
   events,
@@ -40,18 +41,19 @@ function EventsGrid({
       })}
     </div>
   ) : (
-    <div className='flex h-96 flex-col items-center justify-center'>
-      <p className='p-8 text-xl text-secondary'>
-        Rien de prévu{' '}
-        {isCalendarPage
-          ? 'sur cette période'
-          : isActive === 'day'
-            ? 'ce soir'
-            : 'cette semaine'}
-        , une tisane et au lit! <br />
-      </p>
-      <p className='text-4xl'>😴</p>
-    </div>
+    <EmptyEventsSection isActive={isActive} />
+    // <div className='flex h-96 flex-col items-center justify-center'>
+    //   <p className='p-8 text-xl text-secondary'>
+    //     Rien de prévu{' '}
+    //     {isCalendarPage
+    //       ? 'sur cette période'
+    //       : isActive === 'day'
+    //         ? 'ce soir'
+    //         : 'cette semaine'}
+    //     , une tisane et au lit! <br />
+    //   </p>
+    //   <p className='text-4xl'>😴</p>
+    // </div>
   );
 }
 

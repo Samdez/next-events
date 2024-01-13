@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { auth } from '@clerk/nextjs';
 import EventsGrid from '@/components/EventsGrid';
 import { getEvents } from './queries';
+import EmptyEventsSection from '@/components/EmptyEventsSection';
 
 const searchParamsSchema = z.object({
   startDate: z.string().datetime().optional(),
@@ -27,17 +28,12 @@ export default async function Home({
   return (
     <>
       <FilterSection isActive={isActive} />
-      {events.length ? (
-        <EventsGrid events={events} isCalendarPage={false} userId={userId} />
-      ) : (
-        <div className='flex h-96 flex-col items-center justify-center'>
-          <p className='p-8 text-xl text-secondary'>
-            Rien de prévu {isActive === 'day' ? 'ce soir' : 'cette semaine'},
-            une tisane et au lit! <br />
-          </p>
-          <p className='text-4xl'>😴</p>
-        </div>
-      )}
+      <EventsGrid
+        events={events}
+        isCalendarPage={false}
+        userId={userId}
+        isActive={isActive}
+      />
     </>
   );
 }
