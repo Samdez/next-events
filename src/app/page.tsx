@@ -3,7 +3,6 @@ import { z } from 'zod';
 import { auth } from '@clerk/nextjs';
 import EventsGrid from '@/components/EventsGrid';
 import { getEvents } from './queries';
-import EmptyEventsSection from '@/components/EmptyEventsSection';
 
 const searchParamsSchema = z.object({
   startDate: z.string().datetime().optional(),

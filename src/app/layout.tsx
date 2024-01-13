@@ -1,11 +1,12 @@
 import Navbar from '@/components/Navbar';
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Bebas_Neue } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { ReactQueryProvider } from './ReactQueryProvider';
 
 const inter = Inter({ subsets: ['latin'] });
+const bebas = Bebas_Neue({ weight: '400', subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,9 +22,9 @@ export default function RootLayout({
     <ClerkProvider>
       <ReactQueryProvider>
         <html lang='en'>
-          <body className={inter.className}>
+          <body className={bebas.className}>
             <Navbar />
-            <main className='min-h-screen bg-primary p-4'>{children}</main>
+            <main className='min-h-screen bg-[#FFDCA8] p-4'>{children}</main>
           </body>
         </html>
       </ReactQueryProvider>

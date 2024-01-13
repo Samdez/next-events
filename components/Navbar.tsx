@@ -11,33 +11,44 @@ function Navbar() {
   const [activePage, setActivePage] = useState('/');
 
   return (
-    <div className='flex h-32 w-full items-center justify-around border-b border-gray-200 bg-secondary text-primary backdrop-blur-lg backdrop-filter '>
-      <Link href={'/'} onClick={() => setActivePage('/')}>
-        <div
-          className={cn(
-            'flex h-8 w-32 items-center justify-center rounded-full px-8 transition-colors hover:bg-primary hover:text-secondary',
-            {
-              'bg-primary text-secondary': activePage === '/',
-            }
-          )}
-        >
-          <HomeIcon />
-        </div>
+    <div className='grid h-32 w-full grid-cols-6 items-center justify-end  border-b-8 border-black bg-[#FFDCA8] text-black'>
+      <div></div>
+      <Link
+        href={'/'}
+        onClick={() => setActivePage('/')}
+        className={cn(
+          'flex h-full w-80 items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
+          {
+            'bg-black text-[#FFDCA8]': activePage === 'favorites',
+          }
+        )}
+      >
+        <h1 className='w-10/12 text-center text-8xl font-bold'>Goazen!</h1>
       </Link>
-      <Link href={'/favorites'} onClick={() => setActivePage('favorites')}>
-        <div
-          className={cn(
-            'flex h-8 w-64 items-center justify-center rounded-xl px-8 transition-colors hover:bg-primary hover:text-secondary',
-            {
-              'bg-primary text-secondary': activePage === 'favorites',
-            }
-          )}
-        >
-          <p>Mes favoris</p>
-        </div>
+      <div></div>
+      <Link
+        href={'/favorites'}
+        onClick={() => setActivePage('favorites')}
+        className={cn(
+          'flex h-full w-64 items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
+          {
+            'bg-black text-[#FFDCA8]': activePage === 'favorites',
+          }
+        )}
+      >
+        <p>Mes favoris</p>
       </Link>
-      <Link href={'/'} onClick={() => setActivePage('/')}>
-        <h1 className='w-10/12 text-center text-5xl font-bold'>Goazen!</h1>
+      <Link
+        href={'/calendar'}
+        onClick={() => setActivePage('calendar')}
+        className={cn(
+          'flex h-full w-64 items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
+          {
+            'bg-black text-[#FFDCA8]': activePage === 'favorites',
+          }
+        )}
+      >
+        <p>Calendrier</p>
       </Link>
       <div className='flex w-64 items-center justify-center px-8'>
         {isSignedIn ? (
