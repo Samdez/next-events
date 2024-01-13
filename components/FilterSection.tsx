@@ -40,34 +40,54 @@ function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
 
   return (
     <>
-      <div className='flex flex-wrap items-center justify-center gap-4 p-8'>
-        <Link href={createHref('week')} replace>
-          <Button
-            className={`w-36 border-2 border-secondary  hover:bg-secondary hover:text-primary ${
-              isActive === 'week' && 'bg-secondary text-primary'
-            }`}
-          >
-            Cette semaine
-          </Button>
-        </Link>
-        <Link href={createHref('day')} replace>
-          <Button
-            className={`w-36 border-2 border-secondary hover:bg-secondary hover:text-primary 
-          ${isActive === 'day' && 'bg-secondary text-primary'}
-          `}
-          >
-            Ce soir
-          </Button>
-        </Link>
-        <Link href={'/calendar'} replace>
-          <Button
-            className={`w-36 border-2 border-secondary  hover:bg-secondary hover:text-primary `}
-          >
-            Calendrier
-          </Button>
-        </Link>
+      <p className='text-6xl'>
+        on fait quoi{' '}
+        {isActive === undefined
+          ? 'ces jours ci'
+          : isActive === 'day'
+            ? 'ce soir'
+            : 'cette semaine'}{' '}
+        ?
+      </p>
+      <div className='flex flex-wrap items-center justify-center gap-16 p-8'>
+        <FilterButton
+          path={createHref('day')}
+          text='ce soir'
+          isActive={isActive}
+          period='day'
+        />
+        <FilterButton
+          path={createHref('week')}
+          text='cette semaine'
+          isActive={isActive}
+          period='week'
+        />
       </div>
     </>
+  );
+}
+
+function FilterButton({
+  path,
+  text,
+  isActive,
+  period,
+}: {
+  path: string;
+  text: string;
+  isActive: string | undefined;
+  period: string;
+}) {
+  return (
+    <Link href={path} replace>
+      <Button
+        className={`hover:bg-black[#E2B748] h-14 w-44 border-4 border-black bg-[#E2B748] text-2xl text-black hover:border-none hover:bg-black hover:text-[#E2B748]
+       ${isActive === period && 'bg-black text-[#E2B748]'}
+       `}
+      >
+        {text}
+      </Button>
+    </Link>
   );
 }
 

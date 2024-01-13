@@ -19,7 +19,7 @@ function Navbar() {
         className={cn(
           'flex h-full w-80 items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
           {
-            'bg-black text-[#FFDCA8]': activePage === 'favorites',
+            'bg-black text-[#FFDCA8]': activePage === '/',
           }
         )}
       >
@@ -44,7 +44,7 @@ function Navbar() {
         className={cn(
           'flex h-full w-64 items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
           {
-            'bg-black text-[#FFDCA8]': activePage === 'favorites',
+            'bg-black text-[#FFDCA8]': activePage === 'calendar',
           }
         )}
       >
