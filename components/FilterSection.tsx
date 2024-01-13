@@ -5,7 +5,7 @@ function getEndOfWeek(date: Date) {
   const lastday = date.getDate() - (date.getDay() - 1) + 6;
   return new Date(date.setDate(lastday)).toISOString();
 }
-let tomorrow = new Date(
+const tomorrow = new Date(
   new Date().setDate(new Date().getDate() + 1)
 ).toISOString();
 

@@ -1,5 +1,8 @@
+import { eq } from 'drizzle-orm';
+import { db } from '../db/client';
 import { Event } from './types/Event';
 import qs from 'qs';
+import { events, users, usersOnEvents } from '../db/schema';
 
 function extendEndDateToEndOfDay(date: string) {
   return new Date(new Date(date).setUTCHours(24, 0, 0, 0));
@@ -7,7 +10,7 @@ function extendEndDateToEndOfDay(date: string) {
 
 function extendEndDateToEndOfPreviousDay(date: string) {
   const yesterday = new Date(date);
-  yesterday.setDate(new Date(date).getDate() - 2);
+  yesterday.setDate(new Date(date).getDate() - 1);
 
   return new Date(new Date(yesterday).setUTCHours(24, 0, 0, 0));
 }
@@ -47,4 +50,21 @@ export async function getEvents(
 export async function getEvent(id: string): Promise<Event> {
   const res = await fetch(`http://localhost:3000/api/events/${id}`);
   return res.json();
+}
+
+export async function getFavorites(id: string) {
+  const res = await db.query.usersOnEvents.findMany({
+    where: eq(usersOnEvents.userId, id),
+  });
+  return res.map((el) => el.eventId);
+}
+
+export async function getUserFavorites(userId: string) {
+  const res = await db.query.users.findFirst({
+    with: {
+      userEvents: { with: { event: true } },
+    },
+    where: eq(users.id, userId),
+  });
+  return res?.userEvents.map((userEvent) => userEvent.event);
 }

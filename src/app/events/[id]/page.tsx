@@ -6,7 +6,6 @@ import { env } from '@/env';
 
 async function EventPage({ params }: { params: { id: string } }) {
   const event = await getEvent(params.id);
-  console.log('🚀 ~ EventPage ~ event:', event);
   const imageUrl =
     !(typeof event.image === 'string') && event.image ? event.image?.url : '';
   const imageTitle =

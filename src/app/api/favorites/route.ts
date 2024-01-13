@@ -1,9 +1,9 @@
 import { db } from '@/src/db/client';
 import { usersOnEvents } from '@/src/db/schema';
-import { getFavorites } from '@/src/db/utils';
 import { and, eq } from 'drizzle-orm';
 import { NextRequest } from 'next/server';
 import { z } from 'zod';
+import { getEvent, getFavorites, getUserFavorites } from '../../queries';
 
 const userIdSchema = z.object({
   userId: z.string(),
@@ -14,9 +14,10 @@ export async function GET(request: NextRequest) {
 
   const p = userIdSchema.parse({ userId });
   try {
-    const data = await getFavorites(p.userId);
+    const favorites = await getFavorites(p.userId);
+    const events = await Promise.all(favorites.map((fav) => getEvent(fav)));
 
-    return Response.json({ data });
+    return Response.json({ data: events });
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(error.message);
