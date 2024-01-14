@@ -56,7 +56,7 @@ function FavoriteButton({
   return (
     <Button
       onClick={handleClick}
-      className={`h-20 w-20 rounded-full hover:bg-[#ee2244bc] hover:text-white ${
+      className={`h-14 w-14 rounded-full hover:bg-[#ee2244bc] hover:text-white md:h-20 md:w-20 ${
         isFavorite ? 'bg-[#ee2244bc] text-white' : 'bg-white text-black '
       }`}
       type='submit'

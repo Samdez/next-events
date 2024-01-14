@@ -11,8 +11,8 @@ async function EventPage({ params }: { params: { id: string } }) {
     !(typeof event.image === 'string') && event.image ? event.image?.title : '';
 
   return (
-    <div className='flex flex-col items-center text-white'>
-      <h1 className='py-12 text-center text-8xl font-bold text-black'>
+    <div className='flex flex-col items-center  text-white'>
+      <h1 className='text-center text-6xl font-bold text-black'>
         {event.title}
       </h1>
       <div className='rounded-lg border-4 border-black bg-[#ee2244bc] p-2 text-2xl text-black'>
@@ -36,7 +36,7 @@ async function EventPage({ params }: { params: { id: string } }) {
         </Button>
       ) : (
         event.ticketing_url && (
-          <a href={`https://${event.ticketing_url}`} target='_blank'>
+          <a href={`${event.ticketing_url}`} target='_blank'>
             <Button className='rounded-lg border-4 border-black bg-[#ee2244bc] p-2 text-2xl text-black'>
               Billetterie
             </Button>

@@ -36,13 +36,15 @@ function EventCard({
   return (
     <Card
       className={cn(
-        'flex h-1/2 w-1/3 flex-col items-center rounded-xl border-8 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0)]',
+        'flex h-1/2 w-1/3 min-w-[256px] flex-col items-center rounded-xl border-8 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0)]',
         { 'mt-12': !isEven }
       )}
     >
       <Link href={`/events/${event.id}`} className='w-full rounded-xl'>
-        <CardHeader className='border-b-4 border-black bg-[#ee2244bc]'>
-          <CardTitle>{event.title}</CardTitle>
+        <CardHeader className='flex h-28 items-center justify-center border-b-4 border-black bg-[#ee2244bc] p-2'>
+          <CardTitle className='text-center text-2xl md:text-4xl'>
+            {event.title}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className='m-4 flex justify-center overflow-hidden rounded-lg'>
@@ -65,7 +67,7 @@ function EventCard({
       <CardFooter className='flex w-full cursor-default justify-around'>
         <Link href={`/events/${event.id}`}>
           <Button
-            className={`hover:bg-black[#E2B748] h-14 w-28 border-4 border-black bg-[#E2B748] text-2xl text-black hover:border-none hover:bg-black hover:text-[#E2B748]`}
+            className={`hover:bg-black[#E2B748] h-16 w-28 border-4 border-black bg-[#E2B748] text-2xl text-black hover:border-none hover:bg-black hover:text-[#E2B748]`}
           >
             {' '}
             {event.sold_out ? (
