@@ -8,12 +8,10 @@ import EmptyEventsSection from './EmptyEventsSection';
 function EventsGrid({
   events,
   isActive,
-  isCalendarPage,
   userId,
 }: {
   events: Event[];
   isActive?: string;
-  isCalendarPage: boolean;
   userId?: string | null;
 }) {
   const { isLoading, data } = useQuery({
@@ -22,6 +20,7 @@ function EventsGrid({
       fetch(`/api/favorites?userId=${userId}`, {
         next: { tags: ['favorites'] },
       }).then((res) => res.json()),
+    enabled: !!userId,
   });
 
   if (isLoading) return <div>Loading...</div>;

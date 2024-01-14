@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import Link from 'next/link';
 import { getEvent } from '../../queries';
 import { env } from '@/env';
 
@@ -13,8 +12,10 @@ async function EventPage({ params }: { params: { id: string } }) {
 
   return (
     <div className='flex flex-col items-center text-white'>
-      <h1 className='py-12 text-center text-8xl font-bold'>{event.title}</h1>
-      <div className='rounded-lg border-2 border-secondary p-4'>
+      <h1 className='py-12 text-center text-8xl font-bold text-black'>
+        {event.title}
+      </h1>
+      <div className='rounded-lg border-4 border-black bg-[#ee2244bc] p-2 text-2xl text-black'>
         <p className='font-semibold'>
           {new Date(event.date).toLocaleDateString('fr-FR')}
         </p>
@@ -26,18 +27,20 @@ async function EventPage({ params }: { params: { id: string } }) {
         width={640}
         height={640}
       />
-      <p className='p-12'>{event.description}</p>
+      <p className="p-12 font-['Public_Sans'] text-lg text-black">
+        {event.description}
+      </p>
       {event.sold_out ? (
-        <Button className='pointer-events-none border-2 border-white'>
+        <Button className='pointer-events-none rounded-lg border-4 border-black bg-[#ee2244bc] p-2 text-2xl text-black'>
           Complet 😢
         </Button>
       ) : (
         event.ticketing_url && (
-          <Link href={event.ticketing_url} target='_blank'>
-            <Button className='bg-secondary text-primary hover:border-2 hover:text-secondary'>
+          <a href={`https://${event.ticketing_url}`} target='_blank'>
+            <Button className='rounded-lg border-4 border-black bg-[#ee2244bc] p-2 text-2xl text-black'>
               Billetterie
             </Button>
-          </Link>
+          </a>
         )
       )}
     </div>
