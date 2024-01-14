@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '../db/client';
 import { Event } from './types/Event';
 import qs from 'qs';
-import { events, users, usersOnEvents } from '../db/schema';
+import { users, usersOnEvents } from '../db/schema';
 
 function extendEndDateToEndOfDay(date: string) {
   return new Date(new Date(date).setUTCHours(24, 0, 0, 0));
@@ -37,7 +37,7 @@ export async function getEvents(
     { addQueryPrefix: true }
   );
   const res = await fetch(
-    `http://localhost:3000/api/events${stringifiedQuery}`
+    `http://localhost:3000/api/events${stringifiedQuery}&sort=date`
   );
 
   if (!res.ok) {

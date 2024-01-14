@@ -27,12 +27,7 @@ export default async function Home({
   return (
     <>
       <FilterSection isActive={isActive} />
-      <EventsGrid
-        events={events}
-        isCalendarPage={false}
-        userId={userId}
-        isActive={isActive}
-      />
+      <EventsGrid events={events} userId={userId} isActive={isActive} />
     </>
   );
 }

@@ -38,12 +38,10 @@ function CalendarSection() {
           mode='range'
           selected={range}
           onSelect={setRange}
-          className='rounded-lg border bg-secondary text-primary'
+          className='rounded-lg border-4 border-black bg-white text-black'
         />
       </div>
-      {events?.length && (
-        <EventsGrid events={events} isCalendarPage={true} userId={userId} />
-      )}
+      {!!events?.length && <EventsGrid events={events} userId={userId} />}
     </>
   );
 }

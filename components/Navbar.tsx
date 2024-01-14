@@ -11,7 +11,7 @@ function Navbar() {
   const [activePage, setActivePage] = useState('/');
 
   return (
-    <div className='fixed top-0 grid h-32 w-full grid-cols-6 items-center  justify-end border-b-8 border-black bg-[#FFDCA8] text-black'>
+    <div className='fixed top-0 z-50 grid h-32 w-full grid-cols-6  items-center justify-end border-b-8 border-black bg-[#FFDCA8] text-black'>
       <div></div>
       <Link
         href={'/'}
