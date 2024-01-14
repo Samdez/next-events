@@ -20,11 +20,12 @@ function EventCard({
   userId,
   isEven,
 }: {
-  event: Event;
+  event?: Event;
   isFavorite: boolean;
   userId?: string | null;
   isEven: boolean;
 }) {
+  if (!event) return;
   const locationName =
     !(typeof event.location === 'string') && event.location.name;
   const imageUrl =

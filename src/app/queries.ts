@@ -3,6 +3,7 @@ import { db } from '../db/client';
 import { Event } from './types/Event';
 import qs from 'qs';
 import { users, usersOnEvents } from '../db/schema';
+import { env } from '@/env';
 
 function extendEndDateToEndOfDay(date: string) {
   return new Date(new Date(date).setUTCHours(24, 0, 0, 0));
@@ -37,7 +38,7 @@ export async function getEvents(
     { addQueryPrefix: true }
   );
   const res = await fetch(
-    `http://localhost:3000/api/events${stringifiedQuery}&sort=date`
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/events${stringifiedQuery}&sort=date`
   );
 
   if (!res.ok) {
@@ -48,7 +49,7 @@ export async function getEvents(
 }
 
 export async function getEvent(id: string): Promise<Event> {
-  const res = await fetch(`http://localhost:3000/api/events/${id}`);
+  const res = await fetch(`${env.NEXT_PUBLIC_PAYLOAD_URL}/api/events/${id}`);
   return res.json();
 }
 

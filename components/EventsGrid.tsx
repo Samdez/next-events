@@ -24,7 +24,7 @@ function EventsGrid({
   });
 
   if (isLoading) return <div>Loading...</div>;
-  const favoritesIds = !isLoading && data?.data.map((fav: Event) => fav.id);
+  const favoritesIds = !isLoading && data?.data.map((fav: Event) => fav?.id);
 
   return events.length ? (
     <div className='flex flex-wrap justify-around gap-8'>
@@ -32,8 +32,8 @@ function EventsGrid({
         return (
           <EventCard
             event={event}
-            key={event.id}
-            isFavorite={favoritesIds?.includes(event.id) || false}
+            key={event?.id}
+            isFavorite={favoritesIds?.includes(event?.id) || false}
             userId={userId}
             isEven={i % 2 === 0}
           />
