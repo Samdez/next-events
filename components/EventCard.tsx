@@ -48,7 +48,7 @@ function EventCard({
           <div className='m-4 flex justify-center overflow-hidden rounded-lg'>
             <Image
               alt={imageTitle}
-              src={`${env.NEXT_PUBLIC_PAYLOAD_URL}${imageUrl}` || ''}
+              src={imageUrl || ''}
               width={384}
               height={384}
               className='transition hover:scale-110'

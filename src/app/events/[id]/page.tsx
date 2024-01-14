@@ -22,7 +22,7 @@ async function EventPage({ params }: { params: { id: string } }) {
       </div>
       <Image
         className='mx-auto py-10'
-        src={`${env.NEXT_PUBLIC_PAYLOAD_URL}${imageUrl}` || ''}
+        src={imageUrl || ''}
         alt={imageTitle}
         width={640}
         height={640}
