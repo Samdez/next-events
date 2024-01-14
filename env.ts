@@ -3,8 +3,6 @@ import { z } from 'zod';
 
 export const env = createEnv({
   server: {
-    KONTENT_ENVIRONMENT_ID: z.string(),
-    KONTENT_MANAGEMENT_API_KEY: z.string(),
     CLERK_SECRET_KEY: z.string(),
     DATABASE_URL: z.string(),
     DATABASE_TOKEN: z.string(),
@@ -18,8 +16,6 @@ export const env = createEnv({
     NEXT_PUBLIC_PAYLOAD_URL: z.string(),
   },
   runtimeEnv: {
-    KONTENT_ENVIRONMENT_ID: process.env.KONTENT_ENVIRONMENT_ID,
-    KONTENT_MANAGEMENT_API_KEY: process.env.KONTENT_MANAGEMENT_API_KEY,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,

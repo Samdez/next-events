@@ -17,15 +17,7 @@ function Favorites() {
   });
 
   return (
-    <>
-      {!isLoading && (
-        <EventsGrid
-          events={favorites.data}
-          isCalendarPage={false}
-          userId={userId}
-        />
-      )}
-    </>
+    <>{!isLoading && <EventsGrid events={favorites.data} userId={userId} />}</>
   );
 }
 
