@@ -11,7 +11,7 @@ function Navbar() {
   const [activePage, setActivePage] = useState('/');
 
   return (
-    <div className='grid h-32 w-full grid-cols-6 items-center justify-end  border-b-8 border-black bg-[#FFDCA8] text-black'>
+    <div className='fixed top-0 grid h-32 w-full grid-cols-6 items-center  justify-end border-b-8 border-black bg-[#FFDCA8] text-black'>
       <div></div>
       <Link
         href={'/'}
@@ -30,7 +30,7 @@ function Navbar() {
         href={'/favorites'}
         onClick={() => setActivePage('favorites')}
         className={cn(
-          'flex h-full w-64 items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
+          'flex h-full  items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
           {
             'bg-black text-[#FFDCA8]': activePage === 'favorites',
           }
@@ -42,7 +42,7 @@ function Navbar() {
         href={'/calendar'}
         onClick={() => setActivePage('calendar')}
         className={cn(
-          'flex h-full w-64 items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
+          'flex h-full  items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
           {
             'bg-black text-[#FFDCA8]': activePage === 'calendar',
           }
@@ -50,13 +50,17 @@ function Navbar() {
       >
         <p>Calendrier</p>
       </Link>
-      <div className='flex w-64 items-center justify-center px-8'>
+      <div className='flex w-64 items-center justify-center'>
         {isSignedIn ? (
           <UserButton afterSignOutUrl='/' />
         ) : (
           <div>
             <SignInButton>
-              <Button>Me connecter</Button>
+              <Button
+                className={`hover:bg-black[#E2B748] h-14 w-44 border-4 border-black bg-[#E2B748] text-2xl text-black hover:border-none hover:bg-black hover:text-[#E2B748]`}
+              >
+                Me connecter
+              </Button>
             </SignInButton>
           </div>
         )}

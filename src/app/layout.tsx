@@ -24,7 +24,9 @@ export default function RootLayout({
         <html lang='en'>
           <body className={bebas.className}>
             <Navbar />
-            <main className='min-h-screen bg-[#FFDCA8] p-4'>{children}</main>
+            <main className='mt-32 min-h-screen bg-[#FFDCA8] p-4'>
+              {children}
+            </main>
           </body>
         </html>
       </ReactQueryProvider>

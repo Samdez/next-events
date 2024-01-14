@@ -12,15 +12,18 @@ import Link from 'next/link';
 import FavoriteButton from './FavoriteButton';
 import { Event } from '@/src/app/types/Event';
 import { env } from '@/env';
+import { cn } from '@/lib/utils';
 
 function EventCard({
   event,
   isFavorite,
   userId,
+  isEven,
 }: {
   event: Event;
   isFavorite: boolean;
   userId?: string | null;
+  isEven: boolean;
 }) {
   const locationName =
     !(typeof event.location === 'string') && event.location.name;
@@ -30,32 +33,39 @@ function EventCard({
     !(typeof event.image === 'string') && event.image ? event.image?.title : '';
 
   return (
-    <Card className='flex flex-col items-center  border-none'>
-      <Link href={`/events/${event.id}`}>
-        <CardHeader>
+    <Card
+      className={cn(
+        'flex h-1/2 w-1/3 flex-col items-center rounded-xl border-8 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0)]',
+        { 'mt-12': !isEven }
+      )}
+    >
+      <Link href={`/events/${event.id}`} className='w-full rounded-xl'>
+        <CardHeader className='border-b-4 border-black bg-[#ee2244bc]'>
           <CardTitle>{event.title}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className='flex justify-center overflow-hidden rounded-lg'>
+          <div className='m-4 flex justify-center overflow-hidden rounded-lg'>
             <Image
               alt={imageTitle}
               src={`${env.NEXT_PUBLIC_PAYLOAD_URL}${imageUrl}` || ''}
-              width={256}
-              height={256}
+              width={384}
+              height={384}
               className='transition hover:scale-110'
             />
           </div>
-          <CardDescription className='p-4 text-center text-xl font-bold'>
+          <CardDescription className='p-4 text-center text-4xl font-bold'>
             {locationName}
           </CardDescription>
-          <CardDescription className='text-center font-semibold'>
+          <CardDescription className='text-center text-2xl font-semibold'>
             {new Date(event.date).toLocaleDateString('fr-FR')}
           </CardDescription>
         </CardContent>
       </Link>
       <CardFooter className='flex w-full cursor-default justify-around'>
         <Link href={`/events/${event.id}`}>
-          <Button>
+          <Button
+            className={`hover:bg-black[#E2B748] h-14 w-28 border-4 border-black bg-[#E2B748] text-2xl text-black hover:border-none hover:bg-black hover:text-[#E2B748]`}
+          >
             {' '}
             {event.sold_out ? (
               'Complet 😢'

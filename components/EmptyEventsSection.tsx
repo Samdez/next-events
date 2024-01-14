@@ -16,7 +16,7 @@ export default EmptyEventsSection;
 function HomeEmptyEvents({ isActive }: { isActive?: string }) {
   return (
     <div className='flex h-96 flex-col items-center justify-center'>
-      <p className='p-8 text-xl text-secondary'>
+      <p className='p-8 text-4xl text-black'>
         Rien de prévu {isActive === 'day' ? 'ce soir' : 'cette semaine'}, une
         tisane et au lit! <br />
       </p>
@@ -28,7 +28,7 @@ function HomeEmptyEvents({ isActive }: { isActive?: string }) {
 function FavoritesEmptyEvents() {
   return (
     <div className='flex h-96 flex-col items-center justify-center'>
-      <p className='p-8 text-xl text-secondary'>Aucun favori</p>
+      <p className='p-8 text-4xl text-black'>Aucun favori</p>
       <p className='text-4xl'>🤷</p>
     </div>
   );
