@@ -52,7 +52,7 @@ function EventCard({
               src={imageUrl || ''}
               width={384}
               height={384}
-              className='transition hover:scale-110'
+              className='max-h-[384px] object-fill  transition hover:scale-110'
             />
           </div>
           <CardDescription className='p-4 text-center text-4xl font-bold'>
