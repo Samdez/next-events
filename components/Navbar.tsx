@@ -19,7 +19,7 @@ function Navbar() {
   return (
     <>
       {<SideBar onClick={() => setIsOpen(false)} isOpen={isOpen} />}
-      <div className='fixed top-0 grid h-32 w-full grid-cols-4 border-b-8 border-black bg-[#FFDCA8] text-black md:hidden'>
+      <div className='fixed top-0 z-50 grid h-[14vh] w-full grid-cols-4 border-b-8 border-black bg-black text-[#FFDCA8] md:hidden'>
         <Link
           href={'/'}
           onClick={handleClickHome}
@@ -39,7 +39,7 @@ function Navbar() {
           {isOpen ? <div className='text-4xl'>X</div> : <Burger />}
         </div>
       </div>
-      <div className='fixed top-0 z-50 hidden h-32 w-full grid-cols-6 items-center  justify-end border-b-8 border-black bg-[#FFDCA8] text-black md:grid'>
+      <div className='fixed top-0 z-50 hidden h-[14vh] w-full grid-cols-6 items-center  justify-end border-b-8 border-black bg-[#FFDCA8] text-black md:grid'>
         <div></div>
         <Link
           href={'/'}
@@ -127,7 +127,7 @@ function SideBar({
   return (
     <div
       className={cn(
-        'fixed right-0 z-50 flex min-h-screen w-screen flex-col items-center justify-evenly bg-[#FFDCA8] py-2 text-black duration-300 ease-in-out sm:hidden',
+        'fixed right-0 z-50 flex min-h-[86vh] w-screen flex-col items-center justify-evenly bg-[#FFDCA8] py-2 text-black duration-300 ease-in-out sm:hidden',
         {
           'translate-x-0 ': isOpen,
           'translate-x-full': !isOpen,

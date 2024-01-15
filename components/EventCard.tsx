@@ -11,7 +11,6 @@ import { Button } from './ui/button';
 import Link from 'next/link';
 import FavoriteButton from './FavoriteButton';
 import { Event } from '@/src/app/types/Event';
-import { env } from '@/env';
 import { cn } from '@/lib/utils';
 
 function EventCard({
@@ -67,13 +66,13 @@ function EventCard({
       <CardFooter className='flex w-full cursor-default justify-around'>
         <Link href={`/events/${event.id}`}>
           <Button
-            className={`hover:bg-black[#E2B748] h-16 w-28 border-4 border-black bg-[#E2B748] text-2xl text-black hover:border-none hover:bg-black hover:text-[#E2B748]`}
+            className={`hover:bg-black[#E2B748] h-16 w-28 border-4 border-black bg-[#E2B748] text-xl text-black hover:border-none hover:bg-black hover:text-[#E2B748]`}
           >
             {' '}
             {event.sold_out ? (
               'Complet 😢'
             ) : (
-              <p>{event.price ? `${event.price} euros` : 'Gratuit'}</p>
+              <p>{event.price ? `${event.price} €` : 'Gratuit'}</p>
             )}{' '}
           </Button>
         </Link>

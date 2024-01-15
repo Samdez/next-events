@@ -25,7 +25,7 @@ export default function RootLayout({
         <html lang='en'>
           <body className={bebas.className}>
             <Navbar />
-            <main className='mt-32 min-h-screen bg-[#FFDCA8] p-4'>
+            <main className='mt-[14vh] min-h-screen bg-[#FFDCA8] p-4'>
               {children}
             </main>
           </body>
