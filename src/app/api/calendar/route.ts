@@ -20,7 +20,11 @@ export async function GET(request: NextRequest) {
 
   const p = searchParamsSchema.parse({ startDate, endDate });
   try {
-    const data = await getEvents(p.startDate, p.endDate);
+    const { events: data } = await getEvents({
+      startDate: p.startDate,
+      endDate: p.endDate,
+    });
+
     return Response.json({ data });
   } catch (error) {
     if (error instanceof Error) {

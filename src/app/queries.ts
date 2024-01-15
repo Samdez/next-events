@@ -16,10 +16,15 @@ function extendEndDateToEndOfPreviousDay(date: string) {
   return new Date(new Date(yesterday).setUTCHours(24, 0, 0, 0));
 }
 
-export async function getEvents(
-  startDate?: string,
-  endDate?: string
-): Promise<Event[]> {
+export async function getEvents({
+  startDate,
+  endDate,
+  page,
+}: {
+  startDate?: string;
+  endDate?: string;
+  page?: number;
+}): Promise<{ events: Event[]; hasNextPage: boolean }> {
   const extendedStartDate =
     startDate && extendEndDateToEndOfPreviousDay(startDate);
   const extendedEndDate = endDate && extendEndDateToEndOfDay(endDate);
@@ -38,14 +43,15 @@ export async function getEvents(
     { addQueryPrefix: true }
   );
   const res = await fetch(
-    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/events${stringifiedQuery}&sort=date`
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/events${stringifiedQuery}&sort=date&page=${page}`
   );
 
   if (!res.ok) {
     throw new Error(`${res.status} ${res.statusText}`);
   }
+
   const parsed = await res.json();
-  return parsed.docs;
+  return { events: parsed.docs, hasNextPage: parsed.hasNextPage };
 }
 
 export async function getEvent(id: string): Promise<Event> {

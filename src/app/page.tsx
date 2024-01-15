@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { auth } from '@clerk/nextjs';
 import EventsGrid from '@/components/EventsGrid';
 import { getEvents } from './queries';
+import { fetchEvents } from './actions';
 
 const searchParamsSchema = z.object({
   startDate: z.string().datetime().optional(),
@@ -22,12 +23,19 @@ export default async function Home({
     endDate,
   } = searchParamsSchema.parse(searchParams);
 
-  const events = await getEvents(startDate, endDate);
+  const { events, hasNextPage } = await fetchEvents({ startDate, endDate });
 
   return (
     <>
       <FilterSection isActive={isActive} />
-      <EventsGrid events={events} userId={userId} isActive={isActive} />
+      <EventsGrid
+        initialEvents={events}
+        userId={userId}
+        isActive={isActive}
+        startDate={startDate}
+        endDate={endDate}
+        hasNextPageInitial={hasNextPage}
+      />
     </>
   );
 }

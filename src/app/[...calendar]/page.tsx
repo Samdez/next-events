@@ -41,7 +41,13 @@ function CalendarSection() {
           className='rounded-lg border-4 border-black bg-white text-black'
         />
       </div>
-      {!!events?.length && <EventsGrid events={events} userId={userId} />}
+      {!!events?.length && (
+        <EventsGrid
+          initialEvents={events}
+          userId={userId}
+          hasNextPageInitial={false}
+        />
+      )}
     </>
   );
 }
