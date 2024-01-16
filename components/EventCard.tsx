@@ -35,7 +35,7 @@ function EventCard({
   return (
     <Card
       className={cn(
-        'flex h-1/2 w-1/3 min-w-[256px] flex-col items-center rounded-xl border-8 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0)]',
+        'mx-4 flex h-1/2 w-full min-w-[256px] flex-col items-center rounded-xl border-8 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0)] md:mx-0 md:w-1/3',
         { 'mt-12': !isEven }
       )}
     >
@@ -46,13 +46,13 @@ function EventCard({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className='m-4 flex justify-center overflow-hidden rounded-lg'>
+          <div className='m-4 flex h-[300px] justify-center overflow-hidden rounded-lg'>
             <Image
               alt={imageTitle}
               src={imageUrl || ''}
-              width={384}
-              height={384}
-              className='h-auto max-h-[384px] min-h-[384px] w-auto object-fill  transition hover:scale-110'
+              width={300}
+              height={300}
+              className=' max-h-[300px] object-contain transition hover:scale-110'
               priority={true}
             />
           </div>
