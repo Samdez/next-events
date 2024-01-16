@@ -1,7 +1,30 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { getEvent } from '../../queries';
-import { env } from '@/env';
+
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  try {
+    const event = await getEvent(params.id);
+    if (!event) {
+      return {
+        title: 'Not found',
+        description: 'The page you are looking for does not exist',
+      };
+    }
+    return {
+      title: event.title,
+      description: event.description,
+      alternates: {
+        canonical: `/events/${event.id}`,
+      },
+    };
+  } catch (error) {
+    return {
+      title: 'Not found',
+      description: 'The page you are looking for does not exist',
+    };
+  }
+}
 
 async function EventPage({ params }: { params: { id: string } }) {
   const event = await getEvent(params.id);

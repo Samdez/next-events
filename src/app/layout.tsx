@@ -10,8 +10,13 @@ const bebas = Bebas_Neue({ weight: '400', subsets: ['latin'] });
 const publicSans = Public_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.goazen.info'),
   title: 'Goazen!',
   description: "L'agenda des concerts au Pays Basque",
+  verification: {
+    google:
+      'google-site-verification=6jGooaqWsLT2O6T3V0y_9X4eEoscVIdHlIGGj-7e6QM',
+  },
 };
 
 export default function RootLayout({
