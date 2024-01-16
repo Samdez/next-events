@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { PacmanLoader } from 'react-spinners';
 import { useInView } from 'react-intersection-observer';
 import { fetchEvents } from '@/src/app/actions';
+import { useSearchParams } from 'next/navigation';
 
 function EventsGrid({
   initialEvents,
@@ -28,6 +29,7 @@ function EventsGrid({
   const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(hasNextPageInitial);
   const [ref, inView] = useInView();
+  const searchParams = useSearchParams();
 
   const { isLoading, data } = useQuery({
     queryKey: ['favorites'],
@@ -51,6 +53,12 @@ function EventsGrid({
       setHasNextPage(hasNextPage);
     }
   }
+
+  useEffect(() => {
+    setEvents(initialEvents);
+    setHasNextPage(hasNextPageInitial);
+    setPage(1);
+  }, [searchParams]);
 
   useEffect(() => {
     inView && loadMoreEvents();

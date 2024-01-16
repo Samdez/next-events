@@ -51,7 +51,10 @@ export async function getEvents({
   }
 
   const parsed = await res.json();
-  return { events: parsed.docs, hasNextPage: parsed.hasNextPage };
+  return {
+    events: parsed.docs,
+    hasNextPage: parsed.hasNextPage,
+  };
 }
 
 export async function getEvent(id: string): Promise<Event> {

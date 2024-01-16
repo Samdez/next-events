@@ -2,7 +2,6 @@ import FilterSection from '@/components/FilterSection';
 import { z } from 'zod';
 import { auth } from '@clerk/nextjs';
 import EventsGrid from '@/components/EventsGrid';
-import { getEvents } from './queries';
 import { fetchEvents } from './actions';
 
 const searchParamsSchema = z.object({
@@ -23,7 +22,10 @@ export default async function Home({
     endDate,
   } = searchParamsSchema.parse(searchParams);
 
-  const { events, hasNextPage } = await fetchEvents({ startDate, endDate });
+  const { events, hasNextPage } = await fetchEvents({
+    startDate,
+    endDate,
+  });
 
   return (
     <>

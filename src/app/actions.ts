@@ -11,6 +11,10 @@ export async function fetchEvents({
   startDate?: string;
   endDate?: string;
 }) {
-  const { events, hasNextPage } = await getEvents({ page, startDate, endDate });
+  const { events, hasNextPage } = await getEvents({
+    page,
+    startDate,
+    endDate,
+  });
   return { events, hasNextPage };
 }
