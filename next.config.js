@@ -17,6 +17,11 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['@libsql/client'],
   },
+  // logging: {
+  //   fetches: {
+  //     fullUrl: true,
+  //   },
+  // },
 };
 
 module.exports = nextConfig;

@@ -47,6 +47,7 @@ function EventsGrid({
       startDate,
       endDate,
     });
+
     if (newEvents.length) {
       setPage(next);
       setEvents((prev) => [...prev, ...newEvents]);

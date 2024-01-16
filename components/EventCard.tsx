@@ -52,7 +52,8 @@ function EventCard({
               src={imageUrl || ''}
               width={384}
               height={384}
-              className='max-h-[384px] object-fill  transition hover:scale-110'
+              className='h-auto max-h-[384px] min-h-[384px] w-auto object-fill  transition hover:scale-110'
+              priority={true}
             />
           </div>
           <CardDescription className='p-4 text-center text-4xl font-bold'>

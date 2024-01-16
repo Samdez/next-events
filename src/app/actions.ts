@@ -16,5 +16,6 @@ export async function fetchEvents({
     startDate,
     endDate,
   });
+
   return { events, hasNextPage };
 }

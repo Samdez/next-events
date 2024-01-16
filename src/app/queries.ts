@@ -42,8 +42,10 @@ export async function getEvents({
     },
     { addQueryPrefix: true }
   );
+
   const res = await fetch(
-    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/events${stringifiedQuery}&sort=date&page=${page}`
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/events${stringifiedQuery}&sort=date&page=${page}`,
+    { cache: 'no-cache' }
   );
 
   if (!res.ok) {
@@ -51,6 +53,7 @@ export async function getEvents({
   }
 
   const parsed = await res.json();
+
   return {
     events: parsed.docs,
     hasNextPage: parsed.hasNextPage,
