@@ -9,6 +9,7 @@ export default authMiddleware({
     '/',
     '/events/:id',
     '/calendar',
+    '/privacy-policy',
     '/api/webhooks/clerk',
     '/api/webhooks/payload',
     '/api/calendar',
