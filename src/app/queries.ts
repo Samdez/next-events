@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../db/client';
-import { Event } from './types/Event';
+import { Event } from './types/paylaod-types';
 import qs from 'qs';
 import { users, usersOnEvents } from '../db/schema';
 import { env } from '@/env';

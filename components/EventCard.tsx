@@ -10,7 +10,7 @@ import {
 import { Button } from './ui/button';
 import Link from 'next/link';
 import FavoriteButton from './FavoriteButton';
-import { Event } from '@/src/app/types/Event';
+import { Event } from '@/src/app/types/paylaod-types';
 import { cn } from '@/lib/utils';
 
 function EventCard({
@@ -32,6 +32,10 @@ function EventCard({
   const imageTitle =
     !(typeof event.image === 'string') && event.image ? event.image?.title : '';
 
+  const genres = event.genre?.map(
+    (genre) => typeof genre !== 'string' && genre.name
+  );
+
   return (
     <Card
       className={cn(
@@ -50,15 +54,23 @@ function EventCard({
             <Image
               alt={imageTitle}
               src={imageUrl || ''}
-              width={300}
-              height={300}
-              className=' max-h-[300px] object-contain transition hover:scale-110'
+              width={250}
+              height={250}
+              // className='max-h-[300px] object-contain transition hover:scale-110'
+              className='object-cover transition hover:scale-110'
               priority={true}
             />
           </div>
-          <CardDescription className='p-4 text-center text-4xl font-bold'>
+          <CardDescription className='text-center text-4xl font-bold'>
             {locationName}
           </CardDescription>
+          <div className='flex'>
+            {genres?.map((genre) => (
+              <CardDescription className='mx-auto flex h-12 w-36 items-center justify-center rounded-xl border-4 border-[#FFDCA8] text-2xl font-bold'>
+                {genre}
+              </CardDescription>
+            ))}
+          </div>
           <CardDescription className='text-center text-2xl font-semibold'>
             {new Date(event.date).toLocaleDateString('fr-FR')}
           </CardDescription>

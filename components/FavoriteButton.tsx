@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@clerk/nextjs';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Event } from '@/src/app/types/Event';
+import { Event } from '@/src/app/types/paylaod-types';
 
 function FavoriteButton({
   isFavorite,

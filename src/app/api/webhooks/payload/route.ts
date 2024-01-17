@@ -24,8 +24,6 @@ async function createEvent(id: string) {
   try {
     await db.insert(events).values({ id });
   } catch (error: unknown) {
-    console.log(error);
-
     if (error instanceof Error) throw new Error(error.message);
   }
 

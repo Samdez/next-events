@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import EventCard from './EventCard';
-import { Event } from '@/src/app/types/Event';
+import { Event } from '@/src/app/types/paylaod-types';
 import EmptyEventsSection from './EmptyEventsSection';
 import { useEffect, useState } from 'react';
 import { PacmanLoader } from 'react-spinners';

@@ -41,7 +41,7 @@ function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
   return (
     <>
       <p className='text-6xl'>
-        on fait quoi{' '}
+        il se passe quoi{' '}
         {isActive === undefined
           ? 'ces jours ci'
           : isActive === 'day'
