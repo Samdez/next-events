@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Bebas_Neue, Public_Sans } from 'next/font/google';
@@ -32,6 +33,7 @@ export default function RootLayout({
             <Navbar />
             <main className='mt-[14vh] min-h-screen bg-[#FFDCA8] p-4'>
               {children}
+              <Analytics />
             </main>
           </body>
         </html>
