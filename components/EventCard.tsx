@@ -45,7 +45,7 @@ function EventCard({
     >
       <Link href={`/concerts/${event.id}`} className='w-full rounded-xl'>
         <CardHeader className='flex h-28 items-center justify-center border-b-4 border-black bg-[#ee2244bc] p-2'>
-          <CardTitle className='text-center text-2xl md:text-4xl'>
+          <CardTitle className='text-balance text-center text-2xl md:text-4xl'>
             {event.title}
           </CardTitle>
         </CardHeader>

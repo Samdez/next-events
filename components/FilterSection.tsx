@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Button } from './ui/button';
+import FilterSectionText from './FilterSectionText';
 
 function getEndOfWeek(date: Date) {
   const lastday = date.getDate() - (date.getDay() - 1) + 6;
@@ -37,15 +38,7 @@ function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
 
   return (
     <>
-      <p className='text-center text-6xl'>
-        il se passe quoi{' '}
-        {isActive === undefined
-          ? 'ces jours ci'
-          : isActive === 'day'
-            ? 'ce soir'
-            : 'cette semaine'}{' '}
-        ?
-      </p>
+      <FilterSectionText isActive={isActive} />
       <div className='flex flex-wrap items-center justify-center gap-16 p-8'>
         <FilterButton
           path={createHref('day')}
