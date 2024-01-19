@@ -1,13 +1,21 @@
 import Link from 'next/link';
 import { Button } from './ui/button';
 import FilterSectionText from './FilterSectionText';
+import { Category } from '@/src/app/types/paylaod-types';
+import FilterGenreSelect from './FilterGenreSelect';
 
 function getEndOfWeek(date: Date) {
   const lastday = date.getDate() - (date.getDay() - 1) + 6;
   return new Date(date.setDate(lastday)).toISOString();
 }
 
-function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
+function FilterSection({
+  isActive,
+  categories,
+}: {
+  isActive: 'week' | 'day' | undefined;
+  categories: Category[];
+}) {
   const today = new Date().toISOString();
 
   function createHref(input: 'day' | 'week') {
@@ -53,6 +61,7 @@ function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
           period='week'
         />
       </div>
+      <FilterGenreSelect categories={categories} />
     </>
   );
 }

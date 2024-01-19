@@ -32,10 +32,6 @@ function EventCard({
   const imageTitle =
     !(typeof event.image === 'string') && event.image ? event.image?.title : '';
 
-  const genres = event.genre?.map(
-    (genre) => typeof genre !== 'string' && genre.name
-  );
-
   return (
     <Card
       className={cn(
@@ -63,16 +59,21 @@ function EventCard({
           <CardDescription className='text-center text-4xl font-bold'>
             {locationName}
           </CardDescription>
-          <div className='flex'>
-            {genres?.map((genre) => (
-              <CardDescription className='mx-auto flex h-12 w-36 items-center justify-center rounded-xl border-4 border-[#FFDCA8] text-2xl font-bold'>
-                {genre}
+          {event.genres && (
+            <CardDescription className='mx-auto flex h-12 w-36 items-center justify-center rounded-xl border-4 border-[#FFDCA8] text-2xl font-bold'>
+              {event.genres}
+            </CardDescription>
+          )}
+          <div className='flex w-full justify-around'>
+            <CardDescription className='mt-4 text-2xl font-semibold'>
+              {new Date(event.date).toLocaleDateString('fr-FR')}
+            </CardDescription>
+            {event.time && (
+              <CardDescription className='mt-4 text-2xl font-semibold'>
+                {event.time}
               </CardDescription>
-            ))}
+            )}
           </div>
-          <CardDescription className='text-center text-2xl font-semibold'>
-            {new Date(event.date).toLocaleDateString('fr-FR')}
-          </CardDescription>
         </CardContent>
       </Link>
       <CardFooter className='flex w-full cursor-default justify-around'>

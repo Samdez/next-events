@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../db/client';
-import { Event } from './types/paylaod-types';
+import { Category, Event } from './types/paylaod-types';
 import qs from 'qs';
 import { users, usersOnEvents } from '../db/schema';
 import { env } from '@/env';
@@ -80,4 +80,21 @@ export async function getUserFavorites(userId: string) {
     where: eq(users.id, userId),
   });
   return res?.userEvents.map((userEvent) => userEvent.event);
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const res = await fetch(
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/categories?sort=name&limit=100`,
+    {
+      cache: 'no-cache',
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+
+  const parsed = await res.json();
+
+  return parsed.docs;
 }
