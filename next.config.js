@@ -17,6 +17,10 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['@libsql/client'],
   },
+  i18n: {
+    locales: ["fr"],
+    defaultLocale: "fr",
+  },
   // logging: {
   //   fetches: {
   //     fullUrl: true,
