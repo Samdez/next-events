@@ -43,7 +43,7 @@ function EventCard({
         { 'mt-12': !isEven }
       )}
     >
-      <Link href={`/events/${event.id}`} className='w-full rounded-xl'>
+      <Link href={`/concerts/${event.id}`} className='w-full rounded-xl'>
         <CardHeader className='flex h-28 items-center justify-center border-b-4 border-black bg-[#ee2244bc] p-2'>
           <CardTitle className='text-center text-2xl md:text-4xl'>
             {event.title}
@@ -56,7 +56,6 @@ function EventCard({
               src={imageUrl || ''}
               width={250}
               height={250}
-              // className='max-h-[300px] object-contain transition hover:scale-110'
               className='object-cover transition hover:scale-110'
               priority={true}
             />

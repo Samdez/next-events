@@ -30,7 +30,7 @@ function Navbar() {
             }
           )}
         >
-          <h1 className='w-10/12 text-center text-8xl font-bold'>Goazen!</h1>
+          <p className='w-10/12 text-center text-8xl font-bold'>Goazen!</p>
         </Link>
         <div
           className='flex w-full items-center justify-center'
@@ -55,14 +55,14 @@ function Navbar() {
         </Link>
         <div></div>
         <NavLink
-          href={'/favorites'}
+          href={'/favoris'}
           onClick={() => setActivePage('favorites')}
           activePage={activePage}
           pageName='favorites'
           text='mes favoris'
         />
         <NavLink
-          href={'/calendar'}
+          href={'/agenda'}
           onClick={() => setActivePage('calendar')}
           activePage={activePage}
           pageName='calendar'
@@ -135,13 +135,13 @@ function SideBar({
       )}
     >
       <NavLink
-        href={'/favorites'}
+        href={'/favoris'}
         pageName='favorites'
         text='mes favoris'
         onClick={onClick}
       />
       <NavLink
-        href={'/calendar'}
+        href={'/agenda'}
         pageName='calendar'
         text='Calendrier'
         onClick={onClick}

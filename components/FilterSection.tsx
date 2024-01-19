@@ -5,9 +5,6 @@ function getEndOfWeek(date: Date) {
   const lastday = date.getDate() - (date.getDay() - 1) + 6;
   return new Date(date.setDate(lastday)).toISOString();
 }
-const tomorrow = new Date(
-  new Date().setDate(new Date().getDate() + 1)
-).toISOString();
 
 function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
   const today = new Date().toISOString();
@@ -16,7 +13,7 @@ function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
     if (isActive === input) return '/';
     if (!isActive) {
       if (input === 'day')
-        return `?startDate=${today}&endDate=${tomorrow}&isActive=day`;
+        return `?startDate=${today}&endDate=${today}&isActive=day`;
       if (input === 'week') {
         return `?startDate=${today}&endDate=${getEndOfWeek(
           new Date()
@@ -32,7 +29,7 @@ function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
     }
     if (isActive === 'week') {
       if (input === 'day') {
-        return `?startDate=${today}&endDate=${tomorrow}&isActive=day`;
+        return `?startDate=${today}&endDate=${today}&isActive=day`;
       }
     }
     return '/';
@@ -40,7 +37,7 @@ function FilterSection({ isActive }: { isActive: 'week' | 'day' | undefined }) {
 
   return (
     <>
-      <p className='text-6xl'>
+      <p className='text-center text-6xl'>
         il se passe quoi{' '}
         {isActive === undefined
           ? 'ces jours ci'

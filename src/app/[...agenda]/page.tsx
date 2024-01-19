@@ -6,6 +6,7 @@ import { DateRange } from 'react-day-picker';
 import EventsGrid from '@/components/EventsGrid';
 import { useAuth } from '@clerk/nextjs';
 import { Event } from '../types/paylaod-types';
+import { fr } from 'date-fns/locale';
 
 let d = new Date();
 d.setMonth(d.getMonth() + 1);
@@ -39,6 +40,8 @@ function CalendarSection() {
           selected={range}
           onSelect={setRange}
           className='rounded-lg border-4 border-black bg-white text-black'
+          weekStartsOn={1}
+          locale={fr}
         />
       </div>
       {!!events?.length && (
