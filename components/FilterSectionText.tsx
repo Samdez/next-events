@@ -43,10 +43,10 @@ function FilterSectionText({ isActive }: FilterSectionTextProps) {
   }, [isActive]);
 
   return (
-    <p className='text-balance text-center text-6xl'>
+    <h1 className='text-balance text-center text-6xl'>
       Tous les concerts <br className='sm:hidden' /> {name}
       <br className='sm:hidden' /> au Pays basque
-    </p>
+    </h1>
   );
 }
 
