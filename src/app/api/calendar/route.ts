@@ -5,7 +5,7 @@ import { getEvents } from '../../queries';
 const searchParamsSchema = z.object({
   startDate: z.string().datetime().optional(),
   endDate: z.string().datetime().optional(),
-  isActive: z.enum(['day', 'week']).optional(),
+  activeTime: z.enum(['day', 'week']).optional(),
 });
 
 export async function GET(request: NextRequest) {

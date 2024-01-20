@@ -20,10 +20,12 @@ export async function getEvents({
   startDate,
   endDate,
   page,
+  category,
 }: {
   startDate?: string;
   endDate?: string;
   page?: number;
+  category?: string;
 }): Promise<{ events: Event[]; hasNextPage: boolean }> {
   const extendedStartDate =
     startDate && extendEndDateToEndOfPreviousDay(startDate);
@@ -34,6 +36,7 @@ export async function getEvents({
       {
         date: { less_than_equal: extendedEndDate },
       },
+      { ['category.name']: { equals: category } },
     ],
   };
   const stringifiedQuery = qs.stringify(

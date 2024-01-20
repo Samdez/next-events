@@ -8,7 +8,8 @@ import { getCategories } from './queries';
 const searchParamsSchema = z.object({
   startDate: z.string().datetime().optional(),
   endDate: z.string().datetime().optional(),
-  isActive: z.enum(['day', 'week']).optional(),
+  activeTime: z.enum(['day', 'week']).optional(),
+  activeCategory: z.string().optional(),
 });
 
 export default async function Home({
@@ -18,25 +19,31 @@ export default async function Home({
 }) {
   const { userId } = auth();
   const {
-    isActive,
+    activeTime,
     startDate = new Date().toISOString(),
     endDate,
+    activeCategory,
   } = searchParamsSchema.parse(searchParams);
 
   const { events, hasNextPage } = await fetchEvents({
     startDate,
     endDate,
+    activeCategory,
   });
 
   const categories = await getCategories();
 
   return (
     <>
-      <FilterSection isActive={isActive} categories={categories} />
+      <FilterSection
+        activeTime={activeTime}
+        categories={categories}
+        activeCategory={activeCategory}
+      />
       <EventsGrid
         initialEvents={events}
         userId={userId}
-        isActive={isActive}
+        activeTime={activeTime}
         startDate={startDate}
         endDate={endDate}
         hasNextPageInitial={hasNextPage}

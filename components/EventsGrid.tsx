@@ -12,14 +12,14 @@ import { useSearchParams } from 'next/navigation';
 
 function EventsGrid({
   initialEvents,
-  isActive,
+  activeTime,
   userId,
   startDate,
   endDate,
   hasNextPageInitial,
 }: {
   initialEvents: Event[];
-  isActive?: string;
+  activeTime?: string;
   userId?: string | null;
   startDate?: string;
   endDate?: string;
@@ -95,7 +95,7 @@ function EventsGrid({
       )}
     </>
   ) : (
-    <EmptyEventsSection isActive={isActive} />
+    <EmptyEventsSection activeTime={activeTime} />
   );
 }
 
