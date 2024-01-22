@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import EventCard from './EventCard';
 import { Event } from '@/src/app/types/paylaod-types';
 import EmptyEventsSection from './EmptyEventsSection';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { PacmanLoader } from 'react-spinners';
 import { useInView } from 'react-intersection-observer';
 import { fetchEvents } from '@/src/app/actions';
@@ -25,7 +25,7 @@ function EventsGrid({
   endDate?: string;
   hasNextPageInitial: boolean;
 }) {
-  const [events, setEvents] = useState(initialEvents);
+  const [_events, setEvents] = useState(initialEvents);
   const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(hasNextPageInitial);
   const [ref, inView] = useInView();
@@ -61,8 +61,17 @@ function EventsGrid({
     setPage(1);
   }, [searchParams]);
 
+  const events = useMemo(() => {
+    if (!_events.length) return [];
+    return _events.filter(
+      (e, i, arr) => i === arr.findIndex((ee) => ee.id === e.id)
+    );
+  }, [_events]);
+
   useEffect(() => {
     inView && loadMoreEvents();
+    const eventsSet = [...new Set(_events)];
+    console.log('eventsSet', eventsSet);
   }, [inView]);
 
   if (isLoading)
@@ -73,14 +82,14 @@ function EventsGrid({
     );
   const favoritesIds = !isLoading && data?.data.map((fav: Event) => fav?.id);
 
-  return events && events.length ? (
+  return events.length ? (
     <>
       <div className='flex flex-wrap justify-around gap-8'>
         {events.map((event, i) => {
           return (
             <EventCard
               event={event}
-              key={event?.id}
+              key={event.id}
               isFavorite={favoritesIds?.includes(event?.id) || false}
               userId={userId}
               isEven={i % 2 === 0}
@@ -90,7 +99,7 @@ function EventsGrid({
       </div>
       {hasNextPage && (
         <div className='flex h-32 w-full items-center justify-center' ref={ref}>
-          <PacmanLoader />
+          <PacmanLoader /> 🍆
         </div>
       )}
     </>

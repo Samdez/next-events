@@ -48,7 +48,7 @@ export async function getEvents({
 
   const res = await fetch(
     `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/events${stringifiedQuery}&sort=date&page=${page}`,
-    { cache: 'no-cache' }
+    { cache: 'no-store' }
   );
 
   if (!res.ok) {
