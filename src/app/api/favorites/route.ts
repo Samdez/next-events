@@ -3,7 +3,7 @@ import { usersOnEvents } from '@/src/db/schema';
 import { and, eq } from 'drizzle-orm';
 import { NextRequest } from 'next/server';
 import { z } from 'zod';
-import { getEvent, getFavorites, getUserFavorites } from '../../queries';
+import { getEvent, getFavorites } from '../../queries';
 
 const userIdSchema = z.object({
   userId: z.string(),

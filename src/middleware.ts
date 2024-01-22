@@ -1,4 +1,4 @@
-import { authMiddleware } from '@clerk/nextjs';
+import { authMiddleware } from '@clerk/nextjs/server';
 
 // This example protects all routes including api/trpc routes
 // Please edit this to allow other routes to be public as needed.
@@ -7,8 +7,8 @@ export default authMiddleware({
   // "/" will be accessible to all users
   publicRoutes: [
     '/',
-    '/concerts/:id',
-    '/agenda',
+    '/events/:id',
+    '/calendar',
     '/privacy-policy',
     '/api/webhooks/clerk',
     '/api/webhooks/payload',
