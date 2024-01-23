@@ -1,7 +1,7 @@
 'use client';
 
 import { slugifyString } from '@/lib/utils';
-import { Category } from '@/src/app/types/paylaod-types';
+import { Category } from '@/src/app/types/payload-types';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { usePathname } from 'next/navigation';

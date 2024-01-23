@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import EventCard from './EventCard';
-import { Event } from '@/src/app/types/paylaod-types';
+import { Event } from '@/src/app/types/payload-types';
 import EmptyEventsSection from './EmptyEventsSection';
 import { useEffect, useMemo, useState } from 'react';
 import { PacmanLoader } from 'react-spinners';
@@ -83,7 +83,6 @@ function EventsGrid({
     );
   const favoritesIds = !isLoading && data?.data.map((fav: Event) => fav?.id);
 
-  console.log('🚀 ~ events:', events, activeTime);
   return events.length ? (
     <>
       <div className='flex flex-wrap justify-around gap-8'>

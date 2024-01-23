@@ -11,8 +11,6 @@ function FilterSectionText({
   activeTime,
   activeCategory,
 }: FilterSectionTextProps) {
-  console.log('🚀 ~ activeCategory:', activeCategory);
-  console.log('🚀 ~ activeTime:', activeTime);
   const categoryParam = useCategory();
   const [name, setName] = useState('en ce moment');
   const [category, setCategory] = useState(categoryParam);
@@ -84,10 +82,8 @@ function FilterSectionText({
   return (
     <h1 className='text-balance text-center text-2xl'>
       Tous les concerts
-      {/* <br className='sm:hidden' /> */}
       {` ${category} ${name} ` || ' '}
-      {/* <br className='sm:hidden' /> */}
-      au Pays basque
+      au Pays basque et dans les Landes
     </h1>
   );
 }

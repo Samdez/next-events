@@ -2,7 +2,7 @@
 
 import { eq } from 'drizzle-orm';
 import { db } from '../db/client';
-import { Category, Event } from './types/paylaod-types';
+import { Category, Event } from './types/payload-types';
 import qs from 'qs';
 import { users, usersOnEvents } from '../db/schema';
 import { env } from '@/env';

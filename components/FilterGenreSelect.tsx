@@ -1,6 +1,6 @@
 'use client';
 
-import { Category } from '@/src/app/types/paylaod-types';
+import { Category } from '@/src/app/types/payload-types';
 import {
   Select,
   SelectContent,

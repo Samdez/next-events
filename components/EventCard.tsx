@@ -10,7 +10,7 @@ import {
 import { Button } from './ui/button';
 import Link from 'next/link';
 import FavoriteButton from './FavoriteButton';
-import { Event } from '@/src/app/types/paylaod-types';
+import { Event } from '@/src/app/types/payload-types';
 import { cn } from '@/lib/utils';
 
 function EventCard({

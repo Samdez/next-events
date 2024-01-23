@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { DateRange } from 'react-day-picker';
 import EventsGrid from '@/components/EventsGrid';
 import { useAuth } from '@clerk/nextjs';
-import { Event } from '../types/paylaod-types';
+import { Event } from '../types/payload-types';
 import { fr } from 'date-fns/locale';
 
 let d = new Date();

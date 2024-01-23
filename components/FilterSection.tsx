@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from './ui/button';
 import FilterSectionText from './FilterSectionText';
-import { Category } from '@/src/app/types/paylaod-types';
+import { Category } from '@/src/app/types/payload-types';
 import { createHref } from '@/src/app/utils/createHref';
 import GenreButton from './GenreButton';
 import { useCategory } from '@/src/hooks/useGenre';

@@ -44,6 +44,7 @@ export interface Event {
   price?: string | null;
   sold_out?: boolean | null;
   ticketing_url?: string | null;
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -68,6 +69,7 @@ export interface Location {
 export interface Category {
   id: string;
   name: string;
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
 }
