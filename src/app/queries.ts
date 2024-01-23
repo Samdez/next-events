@@ -1,3 +1,5 @@
+'use server';
+
 import { eq } from 'drizzle-orm';
 import { db } from '../db/client';
 import { Category, Event } from './types/paylaod-types';
@@ -36,7 +38,7 @@ export async function getEvents({
       {
         date: { less_than_equal: extendedEndDate },
       },
-      { ['category.name']: { equals: category } },
+      { 'category.slug': { equals: category } },
     ],
   };
   const stringifiedQuery = qs.stringify(
@@ -47,8 +49,8 @@ export async function getEvents({
   );
 
   const res = await fetch(
-    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/events${stringifiedQuery}&sort=date&page=${page}`,
-    { cache: 'no-store' }
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/events${stringifiedQuery}&sort=date&page=${page}`
+    // { cache: 'no-store' }
   );
 
   if (!res.ok) {

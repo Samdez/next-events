@@ -13,7 +13,8 @@ const publicSans = Public_Sans({ subsets: ['latin'] });
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.goazen.info'),
   title: 'Goazen!',
-  description: "L'agenda des concerts au Pays Basque",
+  description:
+    'Tous les concerts du Pays Basque et des Landes: retrouvez tous les concerts et DJ sets rock, rap, electro, reggae, etc... sur Biarritz, Bayonne, Anglet, Capbreton, Hossegor et bien plus encore!',
   verification: {
     google:
       'google-site-verification=6jGooaqWsLT2O6T3V0y_9X4eEoscVIdHlIGGj-7e6QM',

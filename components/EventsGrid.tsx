@@ -7,8 +7,9 @@ import EmptyEventsSection from './EmptyEventsSection';
 import { useEffect, useMemo, useState } from 'react';
 import { PacmanLoader } from 'react-spinners';
 import { useInView } from 'react-intersection-observer';
-import { fetchEvents } from '@/src/app/actions';
 import { useSearchParams } from 'next/navigation';
+import { getEvents } from '@/src/app/queries';
+import { useCategory } from '@/src/hooks/useGenre';
 
 function EventsGrid({
   initialEvents,
@@ -30,6 +31,7 @@ function EventsGrid({
   const [hasNextPage, setHasNextPage] = useState(hasNextPageInitial);
   const [ref, inView] = useInView();
   const searchParams = useSearchParams();
+  const category = useCategory();
 
   const { isLoading, data } = useQuery({
     queryKey: ['favorites'],
@@ -42,10 +44,11 @@ function EventsGrid({
 
   async function loadMoreEvents() {
     const next = page + 1;
-    const { events: newEvents, hasNextPage } = await fetchEvents({
+    const { events: newEvents, hasNextPage } = await getEvents({
       page: next,
       startDate,
       endDate,
+      category,
     });
 
     if (newEvents.length) {
@@ -70,8 +73,6 @@ function EventsGrid({
 
   useEffect(() => {
     inView && loadMoreEvents();
-    const eventsSet = [...new Set(_events)];
-    console.log('eventsSet', eventsSet);
   }, [inView]);
 
   if (isLoading)
@@ -82,6 +83,7 @@ function EventsGrid({
     );
   const favoritesIds = !isLoading && data?.data.map((fav: Event) => fav?.id);
 
+  console.log('🚀 ~ events:', events, activeTime);
   return events.length ? (
     <>
       <div className='flex flex-wrap justify-around gap-8'>
@@ -99,12 +101,12 @@ function EventsGrid({
       </div>
       {hasNextPage && (
         <div className='flex h-32 w-full items-center justify-center' ref={ref}>
-          <PacmanLoader /> 🍆
+          <PacmanLoader />
         </div>
       )}
     </>
   ) : (
-    <EmptyEventsSection activeTime={activeTime} />
+    <EmptyEventsSection activeTime={activeTime} category={category} />
   );
 }
 

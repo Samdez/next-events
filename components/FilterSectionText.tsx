@@ -1,5 +1,6 @@
 'use client';
 
+import { useCategory } from '@/src/hooks/useGenre';
 import { useEffect, useState } from 'react';
 
 type FilterSectionTextProps = {
@@ -10,8 +11,11 @@ function FilterSectionText({
   activeTime,
   activeCategory,
 }: FilterSectionTextProps) {
+  console.log('🚀 ~ activeCategory:', activeCategory);
+  console.log('🚀 ~ activeTime:', activeTime);
+  const categoryParam = useCategory();
   const [name, setName] = useState('en ce moment');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(categoryParam);
 
   let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 

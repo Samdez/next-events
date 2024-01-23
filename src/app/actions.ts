@@ -6,18 +6,18 @@ export async function fetchEvents({
   page = 1,
   startDate,
   endDate,
-  activeCategory,
+  category,
 }: {
   page?: number;
   startDate?: string;
   endDate?: string;
-  activeCategory?: string;
+  category?: string;
 }) {
   const { events, hasNextPage } = await getEvents({
     page,
     startDate,
     endDate,
-    category: activeCategory,
+    category,
   });
 
   return { events, hasNextPage };

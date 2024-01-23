@@ -4,13 +4,7 @@ import { auth } from '@clerk/nextjs';
 import EventsGrid from '@/components/EventsGrid';
 import { fetchEvents } from './actions';
 import { getCategories } from './queries';
-
-const searchParamsSchema = z.object({
-  startDate: z.string().datetime().optional(),
-  endDate: z.string().datetime().optional(),
-  activeTime: z.enum(['day', 'week']).optional(),
-  activeCategory: z.string().optional(),
-});
+import { searchParamsSchema } from '../schemas/searchParams';
 
 export default async function Home({
   searchParams,
@@ -22,24 +16,18 @@ export default async function Home({
     activeTime,
     startDate = new Date().toISOString(),
     endDate,
-    activeCategory,
   } = searchParamsSchema.parse(searchParams);
 
   const { events, hasNextPage } = await fetchEvents({
     startDate,
     endDate,
-    activeCategory,
   });
 
   const categories = await getCategories();
 
   return (
     <>
-      <FilterSection
-        activeTime={activeTime}
-        categories={categories}
-        activeCategory={activeCategory}
-      />
+      <FilterSection activeTime={activeTime} categories={categories} />
       <EventsGrid
         initialEvents={events}
         userId={userId}
