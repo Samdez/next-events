@@ -26,12 +26,12 @@ export function createHref({
     if (time === 'week') return `${url}?${weekLimit}`;
   }
   if (activeTime === 'day') {
-    if (time === 'day') return `/`;
-    if (time === 'week') return `?${weekLimit}`;
+    if (time === 'day') return url;
+    if (time === 'week') return `${url}?${weekLimit}`;
   }
   if (activeTime === 'week') {
-    if (time === 'day') return `?${dayLimit}`;
-    if (time === 'week') return `/`;
+    if (time === 'day') return `${url}?${dayLimit}`;
+    if (time === 'week') return url;
   }
   return '';
 }

@@ -82,7 +82,7 @@ function FilterSectionText({
   return (
     <h1 className='text-balance text-center text-2xl'>
       Tous les concerts
-      {` ${category} ${name} ` || ' '}
+      {` ${category?.replace('_', '/')} ${name} ` || ' '}
       au Pays basque et dans les Landes
     </h1>
   );

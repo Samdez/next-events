@@ -1,12 +1,12 @@
 'use client';
 
-import Link from 'next/link';
 import { Button } from './ui/button';
 import FilterSectionText from './FilterSectionText';
 import { Category } from '@/src/app/types/payload-types';
 import { createHref } from '@/src/app/utils/createHref';
 import GenreButton from './GenreButton';
 import { useCategory } from '@/src/hooks/useGenre';
+import { useRouter } from 'next/navigation';
 
 function FilterSection({
   activeTime,
@@ -63,16 +63,16 @@ function FilterButton({
   activeTime: string | undefined;
   period: string;
 }) {
+  const router = useRouter();
   return (
-    <Link href={path} replace>
-      <Button
-        className={`hover:bg-black[#E2B748] h-14 w-44 border-4 border-black  bg-[#E2B748] text-2xl text-black hover:border-none hover:bg-black hover:text-[#E2B748]
+    <Button
+      className={`hover:bg-black[#E2B748] h-14 w-44 border-4 border-black  bg-[#E2B748] text-2xl text-black hover:border-none hover:bg-black hover:text-[#E2B748]
        ${activeTime === period && 'bg-black text-[#E2B748]'}
        `}
-      >
-        {text}
-      </Button>
-    </Link>
+      onClick={() => router.push(path)}
+    >
+      {text}
+    </Button>
   );
 }
 

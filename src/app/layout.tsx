@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { Inter, Bebas_Neue, Public_Sans } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { ReactQueryProvider } from './ReactQueryProvider';
+import NextTopLoader from 'nextjs-toploader';
 
 const inter = Inter({ subsets: ['latin'] });
 const bebas = Bebas_Neue({ weight: '400', subsets: ['latin'] });
@@ -33,6 +34,7 @@ export default function RootLayout({
           <body className={bebas.className}>
             <Navbar />
             <main className='mt-[14vh] min-h-screen bg-[#FFDCA8] pt-4'>
+              <NextTopLoader color='#ee2244bc' showSpinner={false} />
               {children}
               <Analytics />
             </main>

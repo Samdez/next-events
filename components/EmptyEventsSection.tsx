@@ -29,7 +29,8 @@ function HomeEmptyEvents({
     <div className='flex h-96 flex-col items-center justify-center'>
       <p className='p-8 text-4xl text-black'>
         Rien de prévu {activeTime === 'day' ? 'ce soir' : 'cette semaine'}{' '}
-        {category ? `en ${category}` : ''}, une tisane et au lit! <br />
+        {category ? `en ${category.replace('_', '/')}` : ''}, une tisane et au
+        lit! <br />
       </p>
       <p className='text-4xl'>😴</p>
     </div>

@@ -4,17 +4,22 @@ import { slugifyString } from '@/lib/utils';
 import { Category } from '@/src/app/types/payload-types';
 import Link from 'next/link';
 import { Button } from './ui/button';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 function GenreButton({ genre }: { genre: Category }) {
   const pathname = usePathname();
   const slug = slugifyString(genre.name);
   const isActive = pathname === `/genres/${slug}`;
   const isHome = !pathname.includes('genres');
+  const searchParams = useSearchParams();
 
   function createHref() {
     if (isActive) return '/';
-    return isHome ? `genres/${slug}` : slug;
+    const startDate = searchParams.get('startDate') || '';
+    const endDate = searchParams.get('endDate') || '';
+    const activeTime = searchParams.get('activeTime') || '';
+    const params = new URLSearchParams({ startDate, endDate, activeTime });
+    return isHome ? `genres/${slug}?${params}` : `${slug}?${params}`;
   }
 
   return (
