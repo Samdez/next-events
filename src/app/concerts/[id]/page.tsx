@@ -32,9 +32,11 @@ async function EventPage({ params }: { params: { id: string } }) {
     !(typeof event.image === 'string') && event.image ? event.image?.url : '';
   const imageTitle =
     !(typeof event.image === 'string') && event.image ? event.image?.title : '';
+  const locationName =
+    !(typeof event.location === 'string') && event.location.name;
 
   return (
-    <div className='flex flex-col items-center  text-white'>
+    <div className='flex flex-col items-center  gap-4 text-white'>
       <h1 className='text-center text-6xl font-bold text-black'>
         {event.title}
       </h1>
@@ -43,8 +45,13 @@ async function EventPage({ params }: { params: { id: string } }) {
           {new Date(event.date).toLocaleDateString('fr-FR')}
         </p>
       </div>
+      <div>
+        <p className='text-center text-4xl font-bold text-black'>
+          {locationName}
+        </p>
+      </div>
       <Image
-        className='mx-auto py-10'
+        className='mx-auto'
         src={imageUrl || ''}
         alt={imageTitle}
         width={640}

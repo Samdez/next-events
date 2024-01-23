@@ -10,7 +10,6 @@ function GenreButton({ genre }: { genre: Category }) {
   const pathname = usePathname();
   const slug = slugifyString(genre.name);
   const isActive = pathname === `/genres/${slug}`;
-  console.log(pathname, slug);
 
   const isHome = !pathname.includes('genres');
   const searchParams = useSearchParams();

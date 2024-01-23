@@ -27,6 +27,7 @@ function EventCard({
   if (!event) return;
   const locationName =
     !(typeof event.location === 'string') && event.location.name;
+
   const imageUrl =
     !(typeof event.image === 'string') && event.image ? event.image?.url : '';
   const imageTitle =
