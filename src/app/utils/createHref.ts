@@ -19,7 +19,7 @@ export function createHref({
     new Date()
   )}&activeTime=week`;
   let url = '';
-  url += category ? `/genres/${category}` : '';
+  url += category ? `/genres/${category}` : '/';
 
   if (!activeTime) {
     if (time === 'day') return `${url}?${dayLimit}`;

@@ -14,12 +14,17 @@ function GenreButton({ genre }: { genre: Category }) {
   const searchParams = useSearchParams();
 
   function createHref() {
-    if (isActive) return '/';
     const startDate = searchParams.get('startDate') || '';
     const endDate = searchParams.get('endDate') || '';
     const activeTime = searchParams.get('activeTime') || '';
-    const params = new URLSearchParams({ startDate, endDate, activeTime });
-    return isHome ? `genres/${slug}?${params}` : `${slug}?${params}`;
+    let url = '';
+    if (isHome) url = `genres/${slug}?`;
+    if (isActive) url = `/?`;
+
+    url += startDate && `&startDate=${startDate}`;
+    url += endDate && `&endDate=${endDate}`;
+    url += activeTime && `&activeTime=${activeTime}`;
+    return url;
   }
 
   return (

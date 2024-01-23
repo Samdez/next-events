@@ -85,7 +85,13 @@ function EventCard({
             {event.sold_out ? (
               'Complet 😢'
             ) : (
-              <p>{event.price ? `${event.price} €` : 'Gratuit'}</p>
+              <p>
+                {event.price === '0'
+                  ? 'Gratuit'
+                  : event.price
+                    ? `${event.price} €`
+                    : 'N/A'}
+              </p>
             )}{' '}
           </Button>
         </Link>
