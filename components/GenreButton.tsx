@@ -10,6 +10,8 @@ function GenreButton({ genre }: { genre: Category }) {
   const pathname = usePathname();
   const slug = slugifyString(genre.name);
   const isActive = pathname === `/genres/${slug}`;
+  console.log(pathname, slug);
+
   const isHome = !pathname.includes('genres');
   const searchParams = useSearchParams();
 
@@ -19,7 +21,11 @@ function GenreButton({ genre }: { genre: Category }) {
     const activeTime = searchParams.get('activeTime') || '';
     let url = '';
     if (isHome) url = `genres/${slug}?`;
-    if (isActive) url = `/?`;
+    if (isActive) {
+      url += `/?`;
+    } else {
+      url = `/genres/${slug}?`;
+    }
 
     url += startDate && `&startDate=${startDate}`;
     url += endDate && `&endDate=${endDate}`;
