@@ -8,6 +8,8 @@ export default authMiddleware({
   publicRoutes: [
     '/',
     '/concerts/:id',
+    '/lieux/:slug',
+    '/lieux',
     '/genres/:genre',
     '/agenda',
     '/privacy-policy',

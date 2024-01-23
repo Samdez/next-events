@@ -2,7 +2,7 @@
 
 import { eq } from 'drizzle-orm';
 import { db } from '../db/client';
-import { Category, Event } from './types/payload-types';
+import { Category, Event, Location } from './types/payload-types';
 import qs from 'qs';
 import { users, usersOnEvents } from '../db/schema';
 import { env } from '@/env';
@@ -102,4 +102,40 @@ export async function getCategories(): Promise<Category[]> {
   const parsed = await res.json();
 
   return parsed.docs;
+}
+
+export async function getLocations(): Promise<Location[]> {
+  const res = await fetch(
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/locations?sort=name&limit=100`
+  );
+
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+
+  const parsed = await res.json();
+
+  return parsed.docs;
+}
+
+export async function getLocation(slug: string): Promise<Location> {
+  const query = {
+    slug: { equals: slug },
+  };
+  const stringifiedQuery = qs.stringify(
+    {
+      where: query,
+    },
+    { addQueryPrefix: true }
+  );
+
+  const res = await fetch(
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/locations${stringifiedQuery}&sort=date&limit=100`
+    // { cache: 'no-store' }
+  );
+
+  const parsed = await res.json();
+  console.log(parsed);
+
+  return parsed.docs[0];
 }

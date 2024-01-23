@@ -40,20 +40,19 @@ function Navbar() {
         </div>
       </div>
       <div className='fixed top-0 z-50 hidden h-[14vh] w-full grid-cols-6 items-center  justify-end border-b-8 border-black bg-[#FFDCA8] text-black md:grid'>
-        <div></div>
         <Link
           href={'/'}
           onClick={() => setActivePage('/')}
           className={cn(
-            'flex h-full w-80 items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
+            'col-span-2 flex h-full items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
             {
               'bg-black text-[#FFDCA8]': activePage === '/',
             }
           )}
         >
-          <h1 className='w-10/12 text-center text-8xl font-bold'>Goazen!</h1>
+          <h1 className=' text-center text-8xl font-bold'>Goazen!</h1>
         </Link>
-        <div></div>
+        {/* <div></div> */}
         <NavLink
           href={'/favoris'}
           onClick={() => setActivePage('favorites')}
@@ -67,6 +66,13 @@ function Navbar() {
           activePage={activePage}
           pageName='calendar'
           text='Calendrier'
+        />
+        <NavLink
+          href={'/lieux'}
+          onClick={() => setActivePage('locations')}
+          activePage={activePage}
+          pageName='locations'
+          text='Les lieux'
         />
         <div className='flex w-64 items-center justify-center'>
           {isSignedIn ? (
@@ -144,6 +150,12 @@ function SideBar({
         href={'/agenda'}
         pageName='calendar'
         text='Calendrier'
+        onClick={onClick}
+      />
+      <NavLink
+        href={'/lieux'}
+        pageName='locations'
+        text='Les lieux'
         onClick={onClick}
       />
     </div>
