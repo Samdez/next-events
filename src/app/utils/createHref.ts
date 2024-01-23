@@ -1,8 +1,8 @@
-const today = new Date().toISOString();
+const today = new Date().toISOString().split('T')[0];
 
 function getEndOfWeek(date: Date) {
   const lastday = date.getDate() - (date.getDay() - 1) + 6;
-  return new Date(date.setDate(lastday)).toISOString();
+  return new Date(date.setDate(lastday)).toISOString().split('T')[0];
 }
 
 export function createHref({

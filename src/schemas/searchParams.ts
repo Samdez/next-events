@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const searchParamsSchema = z.object({
-  startDate: z.string().datetime().optional(),
-  endDate: z.string().datetime().optional(),
+  startDate: z.string().optional(),
+  endDate: z.string().optional(),
   activeTime: z.enum(['day', 'week']).optional(),
 });
