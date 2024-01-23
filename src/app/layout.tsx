@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Bebas_Neue, Public_Sans } from 'next/font/google';
@@ -37,6 +38,7 @@ export default function RootLayout({
               <NextTopLoader color='#ee2244bc' showSpinner={false} />
               {children}
               <Analytics />
+              <SpeedInsights />
             </main>
           </body>
         </html>
