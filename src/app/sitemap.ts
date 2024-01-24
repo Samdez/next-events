@@ -1,10 +1,11 @@
-import { getCategories, getEvents } from './queries';
+import { getCategories, getEvents, getLocations } from './queries';
 
 export default async function sitemap() {
   const baseUrl = 'https://www.goazen.info';
 
   const events = await getEvents({ startDate: new Date().toISOString() });
   const categories = await getCategories();
+  const locations = await getLocations();
 
   const eventsUrls = events.events.map((event) => {
     return {
@@ -20,6 +21,13 @@ export default async function sitemap() {
     };
   });
 
+  const locationsUrl = locations.map((loc) => {
+    return {
+      url: `${baseUrl}/lieux/${loc.name}`,
+      lastModified: new Date(),
+    };
+  });
+
   return [
     {
       url: baseUrl,
@@ -31,5 +39,6 @@ export default async function sitemap() {
     { url: `${baseUrl}/agenda`, lastModified: new Date() },
     ...eventsUrls,
     ...categoriesUrl,
+    ...locationsUrl,
   ];
 }
