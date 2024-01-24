@@ -50,7 +50,7 @@ function Navbar() {
             }
           )}
         >
-          <h1 className=' text-center text-8xl font-bold'>Goazen!</h1>
+          <p className=' text-center text-8xl font-bold'>Goazen!</p>
         </Link>
         {/* <div></div> */}
         <NavLink
