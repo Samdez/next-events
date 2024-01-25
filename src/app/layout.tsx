@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <ReactQueryProvider>
-        <html lang='en'>
+        <html lang='fr'>
           <body className={bebas.className}>
             <Navbar />
             <main className='mt-[14vh] min-h-screen bg-[#FFDCA8] pt-4'>

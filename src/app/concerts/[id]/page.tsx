@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
       title: event.title,
       description: event.description,
       alternates: {
-        canonical: `/concerts/${event.id}`,
+        canonical: `/concerts/${event.title}`,
       },
     };
   } catch (error) {

@@ -16,7 +16,7 @@ export async function generateMetadata({
       };
     }
     return {
-      title: location.name,
+      title: location.slug,
       description: location.description,
       alternates: {
         canonical: `/lieux/${location.slug}`,

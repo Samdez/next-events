@@ -1,7 +1,8 @@
 import { getCategories, getEvents, getLocations } from './queries';
+import { type MetadataRoute } from 'next';
 
-export default async function sitemap() {
-  const baseUrl = 'https://www.goazen.info';
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = 'https://goazen.info';
 
   const events = await getEvents({ startDate: new Date().toISOString() });
   const categories = await getCategories();
