@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { getLocation } from '../../queries';
 import { env } from '@/env';
+import { serializeRichText } from '../../../../lib/serializeRichText.js';
 
 export async function generateMetadata({
   params,
@@ -17,7 +18,10 @@ export async function generateMetadata({
     }
     return {
       title: location.slug,
-      description: location.description,
+      description: location.description?.reduce(
+        (acc, val) => (acc += val.text),
+        ''
+      ),
       alternates: {
         canonical: `/lieux/${location.slug}`,
       },
@@ -51,20 +55,7 @@ async function LocationPage({ params }: { params: { slug: string } }) {
           height={640}
         />
       )}
-      <div>
-        {location.description?.map((el) => {
-          return (
-            Array.isArray(el.children) &&
-            el.children?.map((eel) => {
-              return (
-                <p className="font-['Public_Sans'] text-lg text-black">
-                  {eel.text}
-                </p>
-              );
-            })
-          );
-        })}
-      </div>
+      <div>{serializeRichText(location.description)}</div>
       <div className='flex w-full justify-center py-8'>
         <iframe
           width='600'

@@ -135,7 +135,5 @@ export async function getLocation(slug: string): Promise<Location> {
   );
 
   const parsed = await res.json();
-  console.log(parsed);
-
   return parsed.docs[0];
 }
