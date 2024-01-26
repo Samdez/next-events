@@ -24,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const locationsUrl = locations.map((loc) => {
     return {
-      url: `${baseUrl}/lieux/${loc.name}`,
+      url: `${baseUrl}/lieux/${loc.slug}`,
       lastModified: new Date(),
     };
   });
@@ -34,12 +34,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: baseUrl,
       lastModified: new Date(),
     },
+    ...eventsUrls,
+    ...categoriesUrl,
+    ...locationsUrl,
     { url: `${baseUrl}/sign-in`, lastModified: new Date() },
     { url: `${baseUrl}/sign-up`, lastModified: new Date() },
     { url: `${baseUrl}/favoris`, lastModified: new Date() },
     { url: `${baseUrl}/agenda`, lastModified: new Date() },
-    ...eventsUrls,
-    ...categoriesUrl,
-    ...locationsUrl,
   ];
 }
