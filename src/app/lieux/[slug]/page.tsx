@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { getLocation } from '../../queries';
 import { env } from '@/env';
 import { serializeRichText } from '../../../../lib/serializeRichText.js';
+import { Node } from 'slate';
 
 export async function generateMetadata({
   params,
@@ -18,9 +19,8 @@ export async function generateMetadata({
     }
     return {
       title: location.slug,
-      description: location.description?.reduce(
-        (acc, val) => (acc += val.text),
-        ''
+      description: generateMetaDescription(
+        location.description as unknown as Node[]
       ),
       alternates: {
         canonical: `/lieux/${location.slug}`,
@@ -33,6 +33,10 @@ export async function generateMetadata({
     };
   }
 }
+
+const generateMetaDescription = (nodes: Node[]) => {
+  return nodes.map((n) => Node.string(n)).join('\n');
+};
 
 async function LocationPage({ params }: { params: { slug: string } }) {
   const location = await getLocation(params.slug);
