@@ -13,7 +13,7 @@ const bebas = Bebas_Neue({ weight: '400', subsets: ['latin'] });
 const publicSans = Public_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.goazen.info'),
+  metadataBase: new URL('https://goazen.info'),
   title: 'Goazen!',
   description:
     'Tous les concerts du Pays Basque et des Landes: retrouvez tous les concerts et DJ sets rock, rap, electro, reggae, etc... sur Biarritz, Bayonne, Anglet, Capbreton, Hossegor et bien plus encore!',
