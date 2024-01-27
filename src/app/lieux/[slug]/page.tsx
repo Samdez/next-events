@@ -18,7 +18,7 @@ export async function generateMetadata({
       };
     }
     return {
-      title: location.slug,
+      title: location.name,
       description: generateMetaDescription(
         location.description as unknown as Node[]
       ),

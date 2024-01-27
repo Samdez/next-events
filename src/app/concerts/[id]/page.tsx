@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { getEvent } from '../../queries';
+import Link from 'next/link';
+import { slugifyString } from '@/lib/utils';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   try {
@@ -32,8 +34,9 @@ async function EventPage({ params }: { params: { id: string } }) {
     !(typeof event.image === 'string') && event.image ? event.image?.url : '';
   const imageTitle =
     !(typeof event.image === 'string') && event.image ? event.image?.title : '';
-  const locationName =
-    !(typeof event.location === 'string') && event.location.name;
+  const locationName = !(typeof event.location === 'string')
+    ? event.location.name
+    : '';
 
   return (
     <div className='flex flex-col items-center  gap-4 text-white'>
@@ -46,9 +49,12 @@ async function EventPage({ params }: { params: { id: string } }) {
         </p>
       </div>
       <div>
-        <p className='text-center text-4xl font-bold text-black'>
+        <Link
+          href={`/lieux/${slugifyString(locationName)}`}
+          className='text-center text-4xl font-bold text-black'
+        >
           {locationName}
-        </p>
+        </Link>
       </div>
       <Image
         className='mx-auto'
