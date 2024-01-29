@@ -30,7 +30,6 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 
 async function EventPage({ params }: { params: { slug: string } }) {
   const event = await getEvent(params.slug.split('_').reverse()[0]);
-  console.log('🚀 ~ EventPage ~ event:', event);
 
   const imageUrl =
     !(typeof event.image === 'string') && event.image ? event.image?.url : '';

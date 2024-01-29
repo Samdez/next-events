@@ -11,7 +11,7 @@ import { Button } from './ui/button';
 import Link from 'next/link';
 import FavoriteButton from './FavoriteButton';
 import { Event } from '@/src/app/types/payload-types';
-import { cn } from '@/lib/utils';
+import { cn, formatDate } from '@/lib/utils';
 
 function EventCard({
   event,
@@ -70,7 +70,7 @@ function EventCard({
           )}
           <div className='flex w-full justify-around'>
             <CardDescription className='mt-4 text-2xl font-semibold'>
-              {new Date(event.date).toLocaleDateString('fr-FR')}
+              {formatDate(event.date)}
             </CardDescription>
             {event.time && (
               <CardDescription className='mt-4 text-2xl font-semibold'>

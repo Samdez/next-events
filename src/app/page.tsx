@@ -1,5 +1,4 @@
 import FilterSection from '@/components/FilterSection';
-import { z } from 'zod';
 import { auth } from '@clerk/nextjs';
 import EventsGrid from '@/components/EventsGrid';
 import { fetchEvents } from './actions';

@@ -1,8 +1,10 @@
 import Image from 'next/image';
-import { getLocation } from '../../queries';
+import { getEvents, getFavorites, getLocation } from '../../queries';
 import { env } from '@/env';
 import { serializeRichText } from '../../../../lib/serializeRichText.js';
 import { Node } from 'slate';
+import EventsCarousel from '@/components/EventsCarousel';
+import { auth } from '@clerk/nextjs';
 
 export async function generateMetadata({
   params,
@@ -39,14 +41,19 @@ const generateMetaDescription = (nodes: Node[]) => {
 };
 
 async function LocationPage({ params }: { params: { slug: string } }) {
+  const { userId } = auth();
   const location = await getLocation(params.slug);
+  const { events } = await getEvents({
+    locationId: location.id,
+    startDate: new Date().toISOString(),
+  });
   const imageUrl =
     !(typeof location?.image === 'string') && location.image
       ? location.image?.url
       : '';
 
   return (
-    <div className='flex flex-col items-center gap-4 px-4 text-white'>
+    <div className='flex flex-col items-center gap-4 px-4 py-8 text-white'>
       <h1 className='text-center text-6xl font-bold text-black'>
         {location.name}
       </h1>
@@ -69,6 +76,8 @@ async function LocationPage({ params }: { params: { slug: string } }) {
           src={`https://www.google.com/maps/embed/v1/place?q=place_id:${location.place_id}&key=${env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`}
         ></iframe>
       </div>
+      <h2 className='text-4xl text-black'>Prochains concerts: </h2>
+      <EventsCarousel events={events} userId={userId} />
     </div>
   );
 }

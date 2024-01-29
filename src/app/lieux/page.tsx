@@ -8,7 +8,13 @@ async function LocationsPage() {
     <>
       <div className='flex flex-wrap justify-around gap-8'>
         {locations.map((location, i) => {
-          return <LocationCard isEven={i % 2 === 0} location={location} />;
+          return (
+            <LocationCard
+              isEven={i % 2 === 0}
+              location={location}
+              key={location.id}
+            />
+          );
         })}
       </div>
     </>

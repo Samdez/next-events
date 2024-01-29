@@ -23,11 +23,13 @@ export async function getEvents({
   endDate,
   page,
   category,
+  locationId,
 }: {
   startDate?: string;
   endDate?: string;
   page?: number;
   category?: string;
+  locationId?: string;
 }): Promise<{ events: Event[]; hasNextPage: boolean }> {
   const extendedStartDate =
     startDate && extendEndDateToEndOfPreviousDay(startDate);
@@ -39,6 +41,7 @@ export async function getEvents({
         date: { less_than_equal: extendedEndDate },
       },
       { 'category.slug': { equals: category } },
+      { location: { equals: locationId } },
     ],
   };
   const stringifiedQuery = qs.stringify(
@@ -106,7 +109,10 @@ export async function getCategories(): Promise<Category[]> {
 
 export async function getLocations(): Promise<Location[]> {
   const res = await fetch(
-    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/locations?sort=name&limit=100`
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/locations?sort=events.count&limit=100`
+  );
+  console.log(
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/locations?sort=events.count&limit=100`
   );
 
   if (!res.ok) {
