@@ -31,7 +31,12 @@ function AProposPage() {
         « c’est beau le Pays Basque, mais il se passe rien » …
       </p>
       <h1>Qui suis-je ?</h1>
-      <p>Fan de musique et développeur web,</p>
+      <p>
+        Musicien et développeur web, je suis depuis toujours à l'affut des
+        concerts et bons plans au Pays Basque, il m'est donc tout naturellement
+        venu à l'esprit ce créer Goazen, afin de faire partager à un maximum de
+        personnes les évènements que je repérais.
+      </p>
     </article>
   );
 }
