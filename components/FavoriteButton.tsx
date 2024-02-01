@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@clerk/nextjs';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Event } from '@/src/app/types/payload-types';
+import { cn } from '@/lib/utils';
 
 function FavoriteButton({
   isFavorite,
@@ -22,7 +23,7 @@ function FavoriteButton({
 
   const deleteFavoriteMutation = useMutation({
     mutationFn: async () => {
-      await fetch(`api/favorites?eventId=${event.id}&userId=${userId}`, {
+      await fetch(`../api/favorites?eventId=${event.id}&userId=${userId}`, {
         method: 'DELETE',
       });
       await queryClient.invalidateQueries({
@@ -32,7 +33,7 @@ function FavoriteButton({
   });
   const createFavoriteMutation = useMutation({
     mutationFn: async () => {
-      await fetch(`api/favorites`, {
+      await fetch(`../api/favorites`, {
         method: 'POST',
         body: JSON.stringify({
           userId,
@@ -56,12 +57,13 @@ function FavoriteButton({
   return (
     <Button
       onClick={handleClick}
-      className={`h-14 w-14 rounded-full hover:bg-[#ee2244bc] hover:text-white md:h-20 md:w-20 ${
-        isFavorite ? 'bg-[#ee2244bc] text-white' : 'bg-white text-black '
-      }`}
+      className={cn(
+        `absolute right-0 top-0 z-10 rounded-bl-xl rounded-tr-xl border-4 border-black bg-white p-2 text-black hover:bg-[#ee2244bc]`,
+        { 'bg-[#ee2244bc] text-white': isFavorite }
+      )}
       type='submit'
     >
-      <Star className='h-full w-full' />
+      <Star height={24} fill='white' />
     </Button>
   );
 }

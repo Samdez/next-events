@@ -1,7 +1,6 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import EventCard from './EventCard';
 import { Event } from '@/src/app/types/payload-types';
 import EmptyEventsSection from './EmptyEventsSection';
 import { useEffect, useMemo, useState } from 'react';
@@ -10,6 +9,7 @@ import { useInView } from 'react-intersection-observer';
 import { useSearchParams } from 'next/navigation';
 import { getEvents } from '@/src/app/queries';
 import { useCategory } from '@/src/hooks/useGenre';
+import EventThumbnail from './EventThumbnail';
 
 function EventsGrid({
   initialEvents,
@@ -85,15 +85,14 @@ function EventsGrid({
 
   return events.length ? (
     <>
-      <div className='flex flex-wrap justify-around gap-8'>
+      <div className='flex flex-wrap justify-around gap-24 px-12 pb-32'>
         {events.map((event, i) => {
           return (
-            <EventCard
+            <EventThumbnail
               event={event}
               key={event.id}
               isFavorite={favoritesIds?.includes(event?.id) || false}
               userId={userId}
-              isEven={i % 2 === 0}
             />
           );
         })}
