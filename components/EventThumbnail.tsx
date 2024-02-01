@@ -37,7 +37,7 @@ function EventThumbnail({
     !(typeof event.location === 'string') && event.location.name;
 
   return (
-    <Card className='relative h-[360px] rounded-xl'>
+    <Card className='relative h-[360px] rounded-xl border-black shadow-[15px_15px_0px_0px_rgba(0,0,0)]'>
       <FavoriteButton event={event} isFavorite={isFavorite} userId={userId} />
       <Link href={`/concerts/${event.slug}_${event.id}`} className='rounded-xl'>
         <CardContent className='rounded-xl border-4 border-black px-0 py-0'>
@@ -64,6 +64,7 @@ function EventThumbnail({
               src={imageUrl || ''}
               objectFit='cover'
               fill={true}
+              className='rounded-b-md'
             />
             <div className='absolute bottom-4 right-4 flex h-6 min-w-14 items-center justify-center rounded-md bg-white px-2'>
               {eventPrice}
