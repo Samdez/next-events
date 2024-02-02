@@ -39,7 +39,7 @@ function Navbar() {
           {isOpen ? <div className='text-4xl'>X</div> : <Burger />}
         </div>
       </div>
-      <div className='fixed top-0 z-50 hidden h-[14vh] w-full grid-cols-6 items-center  justify-end border-b-8 border-black bg-[#FFDCA8] text-black md:grid'>
+      <div className='fixed top-0 z-50 hidden h-[14vh] w-full grid-cols-7 items-center  justify-end border-b-8 border-black bg-[#FFDCA8] text-black md:grid'>
         <Link
           href={'/'}
           onClick={() => setActivePage('/')}
@@ -73,6 +73,13 @@ function Navbar() {
           activePage={activePage}
           pageName='locations'
           text='Les lieux'
+        />
+        <NavLink
+          href={'/contact'}
+          onClick={() => setActivePage('contact')}
+          activePage={activePage}
+          pageName='contact'
+          text='Contact'
         />
         <div className='flex w-64 items-center justify-center'>
           {isSignedIn ? (
@@ -150,6 +157,12 @@ function SideBar({
         href={'/agenda'}
         pageName='calendar'
         text='Calendrier'
+        onClick={onClick}
+      />
+      <NavLink
+        href={'/contact'}
+        pageName='contact'
+        text='Contact'
         onClick={onClick}
       />
       <NavLink
