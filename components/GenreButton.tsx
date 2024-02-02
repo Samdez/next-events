@@ -36,8 +36,8 @@ function GenreButton({ genre }: { genre: Category }) {
     <div>
       <Link href={createHref()}>
         <Button
-          className={`hover:bg-black[#E2B748] text-md  h-14 w-28 text-pretty border-4 border-black bg-[#ee2244bc] text-black hover:border-none hover:bg-black hover:text-[#ee2244bc] ${
-            isActive && 'bg-black text-[#ee2244bc]'
+          className={`hover:bg-black[#E2B748]  h-10 w-20 text-pretty border-2 border-black bg-white text-black hover:border-none hover:text-[#ee2244bc] ${
+            isActive && 'border-none text-[#ee2244bc]'
           }`}
         >
           {genre.name}

@@ -80,7 +80,7 @@ function FilterSectionText({
   }, [activeCategory]);
 
   return (
-    <h1 className='text-balance text-center text-2xl'>
+    <h1 className='text-balance text-center text-2xl md:pl-8'>
       Tous les concerts
       {` ${category?.replace('_', '/')} ${name} ` || ' '}
       au Pays basque et dans les Landes
