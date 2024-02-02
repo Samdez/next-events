@@ -35,6 +35,8 @@ function EventThumbnail({
         : 'N/A';
   const locationName =
     !(typeof event.location === 'string') && event.location.name;
+  const locationCity =
+    !(typeof event.location === 'string') && event.location.city;
 
   return (
     <Card className='relative h-[360px] rounded-xl border-black shadow-[15px_15px_0px_0px_rgba(0,0,0)]'>
@@ -49,8 +51,9 @@ function EventThumbnail({
             <CardTitle className='text-md text-balance text-2xl'>
               {event.title}
             </CardTitle>
-            <CardDescription className="text-md items-center justify-center rounded-md border-black font-['Public_Sans'] text-[#ee2244bc]">
-              {locationName}
+            <CardDescription className="text-md items-center justify-center rounded-md border-black font-['Public_Sans'] ">
+              <span className='text-[#ee2244bc]'>{locationName}</span> /{' '}
+              {locationCity}
             </CardDescription>
             {event.genres && (
               <CardDescription className="text-md items-center justify-center rounded-md border-black font-['Public_Sans'] text-black">

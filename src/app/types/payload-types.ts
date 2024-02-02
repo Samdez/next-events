@@ -69,6 +69,7 @@ export interface Location {
       }[]
     | null;
   place_id?: string | null;
+  city?: string | null;
   image?: string | Media | null;
   slug?: string | null;
   updatedAt: string;
