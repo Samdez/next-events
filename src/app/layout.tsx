@@ -7,6 +7,7 @@ import { Inter, Bebas_Neue, Public_Sans } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { ReactQueryProvider } from './ReactQueryProvider';
 import NextTopLoader from 'nextjs-toploader';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 const bebas = Bebas_Neue({ weight: '400', subsets: ['latin'] });
@@ -40,6 +41,7 @@ export default function RootLayout({
               <Analytics />
               <SpeedInsights />
             </main>
+            <Toaster />
           </body>
         </html>
       </ReactQueryProvider>
