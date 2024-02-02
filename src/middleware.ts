@@ -13,7 +13,7 @@ export default authMiddleware({
     '/genres/:genre',
     '/agenda',
     '/privacy-policy',
-    '/apropos',
+    '/contact',
     '/api/webhooks/clerk',
     '/api/webhooks/payload',
     '/api/calendar',

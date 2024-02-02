@@ -1,4 +1,8 @@
-function AProposPage() {
+import ContactForm from '@/components/ContactForm';
+import { GithubIcon, LinkedinIcon } from 'lucide-react';
+import Link from 'next/link';
+
+function ContactPage() {
   return (
     <article className='prose max-w-none p-4'>
       <h1>Pourquoi Goazen ?</h1>
@@ -28,17 +32,40 @@ function AProposPage() {
         d’ensemble des sorties culturelles tout au long de l’année, qu’aux gens
         de passage dans notre région, et qui souhaitent découvrir les lieux
         proposant des concerts et DJ sets, afin de ne plus jamais entendre dire
-        « c’est beau le Pays Basque, mais il se passe rien » …
+        « C’est beau le Pays Basque, mais il se passe rien » …
       </p>
       <h1>Qui suis-je ?</h1>
       <p>
-        Musicien et développeur web, je suis depuis toujours à l'affut des
-        concerts et bons plans au Pays Basque, il m'est donc tout naturellement
-        venu à l'esprit ce créer Goazen, afin de faire partager à un maximum de
+        Musicien et développeur web, je suis toujours à l'affut des concerts et
+        bons plans au Pays Basque, il m'est donc tout naturellement venu à
+        l'esprit ce créer Goazen, afin de faire partager à un maximum de
         personnes les évènements que je repérais.
       </p>
+      <div className='flex w-full justify-evenly'>
+        <Link
+          href='https://www.linkedin.com/in/samuel-de-zaldua/'
+          target='_blank'
+        >
+          <div className='group rounded-full border-2 border-black p-2 hover:bg-[#ee2244bc]'>
+            <LinkedinIcon className='group-hover:fill-white' />
+          </div>
+        </Link>
+        <Link href='https://github.com/Samdez' target='_blank'>
+          <div className='group rounded-full border-2 border-black p-2 hover:bg-[#ee2244bc]'>
+            <GithubIcon className='group-hover:fill-white' />
+          </div>
+        </Link>
+      </div>
+      <div className='pt-8'>
+        <h1>
+          Si vous souhaitez voir vos concerts apparaître dans Goazen, faire une
+          suggestion ou une remarque, c'est ici :
+        </h1>
+        <div className='w-full pb-8 text-center text-4xl'>👇</div>
+        <ContactForm />
+      </div>
     </article>
   );
 }
 
-export default AProposPage;
+export default ContactPage;

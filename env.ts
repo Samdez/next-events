@@ -6,6 +6,8 @@ export const env = createEnv({
     CLERK_SECRET_KEY: z.string(),
     DATABASE_URL: z.string(),
     DATABASE_TOKEN: z.string(),
+    RESEND_API_KEY: z.string(),
+    GOAZEN_EMAIL_ADDRESS: z.string(),
   },
   client: {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
@@ -31,5 +33,7 @@ export const env = createEnv({
     NEXT_PUBLIC_PAYLOAD_URL: process.env.NEXT_PUBLIC_PAYLOAD_URL,
     NEXT_PUBLIC_GOOGLE_MAPS_API_KEY:
       process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    GOAZEN_EMAIL_ADDRESS: process.env.GOAZEN_EMAIL_ADDRESS,
   },
 });
