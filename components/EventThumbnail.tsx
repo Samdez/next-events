@@ -65,9 +65,10 @@ function EventThumbnail({
             <Image
               alt={imageTitle}
               src={imageUrl || ''}
-              objectFit='cover'
-              fill={true}
-              className='rounded-b-md'
+              fill
+              sizes='176px'
+              className='rounded-b-md object-cover'
+              priority
             />
             <div className='absolute bottom-4 right-4 flex h-6 min-w-14 items-center justify-center rounded-md bg-white px-2'>
               {eventPrice}
