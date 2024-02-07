@@ -8,14 +8,13 @@ export async function POST(request: Request) {
     const { email, message } = await request.json();
 
     const data = await resend.emails.send({
-      // from: email,
-      // to: env.GOAZEN_EMAIL_ADDRESS,
-      from: 'onboarding@resend.dev',
+      from: 'Goazen <contact@goazen.info>',
       to: env.GOAZEN_EMAIL_ADDRESS,
       subject: 'Nouveau message',
       text: `Nouveau mail de : ${email}, ${message}`,
       reply_to: email,
     });
+    return Response.json({ data });
   } catch (error) {
     return Response.json({ error });
   }

@@ -17,6 +17,7 @@ export default authMiddleware({
     '/api/webhooks/clerk',
     '/api/webhooks/payload',
     '/api/calendar',
+    '/api/send',
   ],
 });
 export const config = {
