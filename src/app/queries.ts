@@ -111,9 +111,6 @@ export async function getLocations(): Promise<Location[]> {
   const res = await fetch(
     `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/locations?sort=events.count&limit=100`
   );
-  console.log(
-    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/locations?sort=events.count&limit=100`
-  );
 
   if (!res.ok) {
     throw new Error(`${res.status} ${res.statusText}`);
