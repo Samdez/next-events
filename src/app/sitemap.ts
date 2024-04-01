@@ -9,8 +9,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const locations = await getLocations();
 
   const eventsUrls = events.events.map((event) => {
+    const locationCity =
+      !(typeof event.location === 'string') &&
+      event.location.city?.toLowerCase();
     return {
-      url: `${baseUrl}/concerts/${event.id}`,
+      url: `${baseUrl}/concerts/${locationCity}/${event.slug}_${event.id}`,
       lastModified: new Date(),
     };
   });

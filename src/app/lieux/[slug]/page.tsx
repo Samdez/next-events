@@ -66,7 +66,9 @@ async function LocationPage({ params }: { params: { slug: string } }) {
           height={640}
         />
       )}
-      <div>{serializeRichText(location.description)}</div>
+      <div>
+        {location.description && serializeRichText(location.description)}
+      </div>
       <div className='flex w-full justify-center py-8'>
         <iframe
           width='600'
