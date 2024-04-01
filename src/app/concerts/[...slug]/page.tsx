@@ -33,8 +33,6 @@ export async function generateMetadata({
 }
 
 async function EventPage({ params }: { params: { slug: string[] } }) {
-  console.log('params', params);
-
   const event = await getEvent(params.slug[1].split('_').reverse()[0]);
 
   const imageUrl =
