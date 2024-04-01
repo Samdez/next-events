@@ -18,14 +18,18 @@ const nextConfig = {
     serverComponentsExternalPackages: ['@libsql/client'],
   },
   i18n: {
-    locales: ["fr"],
-    defaultLocale: "fr",
+    locales: ['fr'],
+    defaultLocale: 'fr',
   },
-  // logging: {
-  //   fetches: {
-  //     fullUrl: true,
-  //   },
-  // },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/concerts',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

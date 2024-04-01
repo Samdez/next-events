@@ -36,12 +36,15 @@ function EventThumbnail({
   const locationName =
     !(typeof event.location === 'string') && event.location.name;
   const locationCity =
-    !(typeof event.location === 'string') && event.location.city;
+    !(typeof event.location === 'string') && event.location.city?.toLowerCase();
 
   return (
     <Card className='relative h-[360px] rounded-xl border-black shadow-[15px_15px_0px_0px_rgba(0,0,0)]'>
       <FavoriteButton event={event} isFavorite={isFavorite} userId={userId} />
-      <Link href={`/concerts/${event.slug}_${event.id}`} className='rounded-xl'>
+      <Link
+        href={`/concerts/${locationCity}/${event.slug}_${event.id}`}
+        className='rounded-xl'
+      >
         <CardContent className='rounded-xl border-4 border-black px-0 py-0'>
           <CardHeader className='h-44 px-2 py-4'>
             <span className='text-xl text-[#ee2244bc]'>

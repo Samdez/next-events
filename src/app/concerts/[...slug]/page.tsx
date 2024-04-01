@@ -4,9 +4,13 @@ import { getEvent } from '../../queries';
 import Link from 'next/link';
 import { slugifyString } from '@/lib/utils';
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string[] };
+}) {
   try {
-    const event = await getEvent(params.id);
+    const event = await getEvent(params.slug[1]);
     if (!event) {
       return {
         title: 'Not found',
@@ -28,8 +32,10 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   }
 }
 
-async function EventPage({ params }: { params: { slug: string } }) {
-  const event = await getEvent(params.slug.split('_').reverse()[0]);
+async function EventPage({ params }: { params: { slug: string[] } }) {
+  console.log('params', params);
+
+  const event = await getEvent(params.slug[1].split('_').reverse()[0]);
 
   const imageUrl =
     !(typeof event.image === 'string') && event.image ? event.image?.url : '';
