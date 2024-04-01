@@ -10,7 +10,10 @@ export async function generateMetadata({
   params: { slug: string[] };
 }) {
   try {
-    const event = await getEvent(params.slug[1]);
+    const event = await getEvent(params.slug[1].split('_').reverse()[0]);
+    const locationCity =
+      !(typeof event.location === 'string') &&
+      event.location.city?.toLowerCase();
     if (!event) {
       return {
         title: 'Not found',
@@ -21,7 +24,7 @@ export async function generateMetadata({
       title: event.title,
       description: event.description,
       alternates: {
-        canonical: `/concerts/${event.title}`,
+        canonical: `/concerts/${locationCity}/${event.slug}_${event.id}`,
       },
     };
   } catch (error) {

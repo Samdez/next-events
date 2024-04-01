@@ -1,7 +1,4 @@
 import FilterSection from '@/components/FilterSection';
-import { auth } from '@clerk/nextjs';
-import EventsGrid from '@/components/EventsGrid';
-import { fetchEvents } from '../actions';
 import { getCategories } from '../queries';
 import { searchParamsSchema } from '../../schemas/searchParams';
 import { Suspense } from 'react';
