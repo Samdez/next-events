@@ -92,10 +92,10 @@ export async function getUserFavorites(userId: string) {
 
 export async function getCategories(): Promise<Category[]> {
   const res = await fetch(
-    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/categories?sort=name&limit=100`
-    // {
-    //   cache: 'no-cache',
-    // }
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/categories?sort=name&limit=100`,
+    {
+      cache: 'no-store',
+    }
   );
 
   if (!res.ok) {

@@ -15,6 +15,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return {
       url: `${baseUrl}/concerts/${locationCity}/${event.slug}_${event.id}`,
       lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 1,
     };
   });
 
@@ -29,6 +31,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return {
       url: `${baseUrl}/lieux/${loc.slug}`,
       lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
     };
   });
 
