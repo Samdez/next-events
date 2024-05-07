@@ -87,14 +87,7 @@ function EventsGrid({
     <>
       <div className='flex flex-wrap justify-around gap-24 px-12 pb-32'>
         {events.map((event, i) => {
-          return (
-            <EventThumbnail
-              event={event}
-              key={event.id}
-              isFavorite={favoritesIds?.includes(event?.id) || false}
-              userId={userId}
-            />
-          );
+          return <EventThumbnail event={event} key={event.id} />;
         })}
       </div>
       {hasNextPage && (

@@ -1,6 +1,6 @@
 import FilterSection from '@/components/FilterSection';
-import { getCategories } from '../queries';
-import { searchParamsSchema } from '../../schemas/searchParams';
+import { getCategories } from './queries';
+import { searchParamsSchema } from '../schemas/searchParams';
 import { Suspense } from 'react';
 import { PacmanLoader } from 'react-spinners';
 import RSCEventsGrid from '@/components/RSCEventsGrid';

@@ -21,15 +21,6 @@ const nextConfig = {
     locales: ['fr'],
     defaultLocale: 'fr',
   },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/concerts',
-        permanent: true,
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;
