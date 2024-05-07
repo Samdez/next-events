@@ -1,13 +1,10 @@
 'use client';
 import Link from 'next/link';
-import { SignInButton, UserButton, useUser } from '@clerk/nextjs';
-import { Button } from './ui/button';
 import { MouseEventHandler, useState } from 'react';
 import { cn } from '@/lib/utils';
 import Burger from './ui/icons/burger';
 
 function Navbar() {
-  const { isSignedIn } = useUser();
   const [activePage, setActivePage] = useState('/');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,88 +41,78 @@ function Navbar() {
           href={'/'}
           onClick={() => setActivePage('/')}
           className={cn(
-            'col-span-2 flex h-full items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
+            'col-span-1 flex h-full items-center justify-center  text-2xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
             {
               'bg-black text-[#FFDCA8]': activePage === '/',
             }
           )}
         >
-          <p className=' text-center text-8xl font-bold'>Goazen!</p>
+          <p className='text-center text-6xl font-bold'>Goazen!</p>
         </Link>
-        {/* <div></div> */}
-        <NavLink
-          href={'/favoris'}
-          onClick={() => setActivePage('favorites')}
-          activePage={activePage}
-          pageName='favorites'
-          text='mes favoris'
+        <CityFilter
+          href={'/concerts/biarritz'}
+          text='Biarritz'
+          onClick={() => setActivePage('biarritz')}
+          className={activePage === 'biarritz' ? 'bg-black text-[#FFDCA8]' : ''}
         />
-        <NavLink
-          href={'/agenda'}
-          onClick={() => setActivePage('calendar')}
-          activePage={activePage}
-          pageName='calendar'
-          text='Calendrier'
+        <CityFilter
+          href={'/concerts/anglet'}
+          onClick={() => setActivePage('anglet')}
+          text='Anglet'
+          className={activePage === 'anglet' ? 'bg-black text-[#FFDCA8]' : ''}
         />
-        <NavLink
+        <CityFilter
+          href={'/concerts/bayonne'}
+          onClick={() => setActivePage('bayonne')}
+          className={activePage === 'bayonne' ? 'bg-black text-[#FFDCA8]' : ''}
+          text='Bayonne'
+        />
+        <span></span>
+        <CityFilter
           href={'/lieux'}
-          onClick={() => setActivePage('locations')}
-          activePage={activePage}
-          pageName='locations'
-          text='Les lieux'
+          text='les salles de concert'
+          secondaryText='du pays basque et des landes'
+          className='bg-[#ee2244bc] text-white'
+          onClick={() => setActivePage('/')}
         />
-        <NavLink
+        <CityFilter
           href={'/contact'}
-          onClick={() => setActivePage('contact')}
-          activePage={activePage}
-          pageName='contact'
           text='Contact'
+          secondaryText='parle-nous de ta soirée'
+          onClick={() => setActivePage('contact')}
+          className={activePage === 'contact' ? 'bg-black text-[#FFDCA8]' : ''}
         />
-        <div className='flex w-64 items-center justify-center'>
-          {isSignedIn ? (
-            <UserButton afterSignOutUrl='/' />
-          ) : (
-            <div>
-              <SignInButton>
-                <Button
-                  className={`hover:bg-black[#E2B748] h-14 w-44 border-4 border-black bg-[#E2B748] text-2xl text-black hover:border-none hover:bg-black hover:text-[#E2B748]`}
-                >
-                  Me connecter
-                </Button>
-              </SignInButton>
-            </div>
-          )}
-        </div>
       </div>
     </>
   );
 }
 
-function NavLink({
+function CityFilter({
   href,
   onClick,
-  pageName,
-  activePage,
   text,
+  className,
+  secondaryText,
 }: {
   href: string;
-  onClick?: MouseEventHandler<HTMLAnchorElement>;
-  pageName: string;
-  activePage?: string;
   text: string;
+  className?: string;
+  secondaryText?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }) {
   return (
     <Link
-      href={href}
       onClick={onClick}
+      href={href}
       className={cn(
-        'flex h-full  items-center justify-center text-4xl transition-colors hover:bg-black hover:text-[#FFDCA8]',
-        {
-          'bg-black text-[#FFDCA8]': activePage === pageName,
-        }
+        'flex h-full items-center justify-center rounded-none bg-[#FFDCA8] px-0 text-black transition-colors hover:bg-black hover:text-[#FFDCA8]',
+        className
       )}
     >
-      <p>{text}</p>
+      <div className='flex flex-col text-center'>
+        <p className='text-3xl'>{text}</p>
+        <p className='text-md'>{secondaryText}</p>
+      </div>
     </Link>
   );
 }
@@ -147,30 +134,14 @@ function SideBar({
         }
       )}
     >
-      <NavLink
-        href={'/favoris'}
-        pageName='favorites'
-        text='mes favoris'
+      <CityFilter
+        href={'/concerts/biarritz'}
+        text='Biarritz'
         onClick={onClick}
       />
-      <NavLink
-        href={'/agenda'}
-        pageName='calendar'
-        text='Calendrier'
-        onClick={onClick}
-      />
-      <NavLink
-        href={'/contact'}
-        pageName='contact'
-        text='Contact'
-        onClick={onClick}
-      />
-      <NavLink
-        href={'/lieux'}
-        pageName='locations'
-        text='Les lieux'
-        onClick={onClick}
-      />
+      <CityFilter href={'/concerts/anglet'} text='Anglet' onClick={onClick} />
+      <CityFilter href={'/concerts/bayonne'} text='Bayonne' onClick={onClick} />
+      <CityFilter href={'/lieux'} text='Les lieux' onClick={onClick} />
     </div>
   );
 }

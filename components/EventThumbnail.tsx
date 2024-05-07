@@ -1,5 +1,3 @@
-'use client';
-
 import { formatDate } from '@/lib/utils';
 import {
   Card,
@@ -11,17 +9,8 @@ import {
 import { Event } from '@/src/app/types/payload-types';
 import Image from 'next/image';
 import Link from 'next/link';
-import FavoriteButton from './FavoriteButton';
 
-function EventThumbnail({
-  event,
-  isFavorite,
-  userId,
-}: {
-  event: Event;
-  isFavorite: boolean;
-  userId?: string | null;
-}) {
+function EventThumbnail({ event }: { event: Event }) {
   const imageUrl =
     !(typeof event.image === 'string') && event.image ? event.image?.url : '';
   const imageTitle =
@@ -36,13 +25,14 @@ function EventThumbnail({
   const locationName =
     !(typeof event.location === 'string') && event.location.name;
   const locationCity =
-    !(typeof event.location === 'string') && event.location.city?.toLowerCase();
+    !(typeof event.location === 'string') && event.location.city;
+  const locationSlug =
+    !(typeof event.location === 'string') && event.location.slug;
 
   return (
     <Card className='relative h-[360px] rounded-xl border-black shadow-[15px_15px_0px_0px_rgba(0,0,0)]'>
-      <FavoriteButton event={event} isFavorite={isFavorite} userId={userId} />
       <Link
-        href={`/concerts/${locationCity}/${event.slug}_${event.id}`}
+        href={`/concerts/${locationCity}/${locationSlug}/${event.slug}_${event.id}`}
         className='rounded-xl'
       >
         <CardContent className='rounded-xl border-4 border-black px-0 py-0'>

@@ -33,16 +33,12 @@ function EventsCarousel({
   }
 
   return (
-    <Carousel className='w-[min(100%,1280px)]'>
+    <Carousel className='w-[min(100%,1280px)] py-16'>
       <CarouselContent>
         {events.map((event) => {
           return (
             <CarouselItem key={event.id} className='md:basis-1/3'>
-              <EventThumbnail
-                event={event}
-                isFavorite={favoritesIds?.includes(event.id)}
-                userId={userId}
-              />
+              <EventThumbnail event={event} />
             </CarouselItem>
           );
         })}

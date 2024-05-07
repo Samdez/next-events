@@ -92,10 +92,10 @@ export async function getUserFavorites(userId: string) {
 
 export async function getCategories(): Promise<Category[]> {
   const res = await fetch(
-    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/categories?sort=name&limit=100`,
-    {
-      cache: 'no-store',
-    }
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/categories?sort=name&limit=100`
+    // {
+    //   cache: 'no-store',
+    // }
   );
 
   if (!res.ok) {
@@ -107,9 +107,26 @@ export async function getCategories(): Promise<Category[]> {
   return parsed.docs;
 }
 
-export async function getLocations(): Promise<Location[]> {
+export async function getLocations(cityName?: string): Promise<Location[]> {
+  let url: string;
+  if (cityName) {
+    const query = {
+      and: [{ city: { equals: cityName } }],
+    };
+    const stringifiedQuery = qs.stringify(
+      {
+        where: query,
+      },
+      { addQueryPrefix: true }
+    );
+    url = `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/locations${stringifiedQuery}&sort=name&limit=100`;
+  } else {
+    url = `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/locations?sort=name&limit=100`;
+  }
+
   const res = await fetch(
-    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/locations?sort=events.count&limit=100`
+    url
+    // { cache: 'no-store' }
   );
 
   if (!res.ok) {
@@ -139,4 +156,30 @@ export async function getLocation(slug: string): Promise<Location> {
 
   const parsed = await res.json();
   return parsed.docs[0];
+}
+
+export async function getLocationsByCity(
+  cityName: string
+): Promise<Location[]> {
+  const query = {
+    and: [{ city: { equals: cityName } }],
+  };
+  const stringifiedQuery = qs.stringify(
+    {
+      where: query,
+    },
+    { addQueryPrefix: true }
+  );
+
+  const res = await fetch(
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/locations${stringifiedQuery}`
+  );
+
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+
+  const parsed = await res.json();
+
+  return parsed.docs;
 }

@@ -1,17 +1,17 @@
 import Image from 'next/image';
-import { getEvents, getFavorites, getLocation } from '../../queries';
 import { env } from '@/env';
-import { serializeRichText } from '../../../../lib/serializeRichText.js';
-import { Node } from 'slate';
 import EventsCarousel from '@/components/EventsCarousel';
+import { serializeRichText } from '@/lib/serializeRichText';
+import { getLocation, getEvents } from '@/src/app/queries';
+import { Node } from 'slate';
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: { city: string; location: string };
 }) {
   try {
-    const location = await getLocation(params.slug);
+    const location = await getLocation(params.location);
     if (!location) {
       return {
         title: 'Not found',
@@ -39,8 +39,12 @@ const generateMetaDescription = (nodes: Node[]) => {
   return nodes.map((n) => Node.string(n)).join('\n');
 };
 
-async function LocationPage({ params }: { params: { slug: string } }) {
-  const location = await getLocation(params.slug);
+async function LocationPage({
+  params,
+}: {
+  params: { city: string; location: string };
+}) {
+  const location = await getLocation(params.location);
   const { events } = await getEvents({
     locationId: location.id,
     startDate: new Date().toISOString(),
@@ -55,6 +59,16 @@ async function LocationPage({ params }: { params: { slug: string } }) {
       <h1 className='text-center text-6xl font-bold text-black'>
         {location.name}
       </h1>
+      <h2 className='text-4xl text-black'>Prochains concerts: </h2>
+      {events.length ? (
+        <EventsCarousel events={events} />
+      ) : (
+        <div className='flex h-36 items-center'>
+          <p className='text-4l text-black'>
+            Rien de prévu ici à notre connaissance...😔
+          </p>
+        </div>
+      )}
       {imageUrl && (
         <Image
           className='mx-auto'
@@ -76,8 +90,6 @@ async function LocationPage({ params }: { params: { slug: string } }) {
           src={`https://www.google.com/maps/embed/v1/place?q=place_id:${location.place_id}&key=${env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`}
         ></iframe>
       </div>
-      <h2 className='text-4xl text-black'>Prochains concerts: </h2>
-      <EventsCarousel events={events} />
     </div>
   );
 }

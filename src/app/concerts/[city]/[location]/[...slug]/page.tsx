@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { getEvent } from '../../queries';
 import Link from 'next/link';
 import { slugifyString } from '@/lib/utils';
+import { getEvent } from '@/src/app/queries';
 
 export async function generateMetadata({
   params,
@@ -10,7 +10,7 @@ export async function generateMetadata({
   params: { slug: string[] };
 }) {
   try {
-    const event = await getEvent(params.slug[1].split('_').reverse()[0]);
+    const event = await getEvent(params.slug[0].split('_').reverse()[0]);
     const locationCity =
       !(typeof event.location === 'string') &&
       event.location.city?.toLowerCase();
@@ -36,7 +36,7 @@ export async function generateMetadata({
 }
 
 async function EventPage({ params }: { params: { slug: string[] } }) {
-  const event = await getEvent(params.slug[1].split('_').reverse()[0]);
+  const event = await getEvent(params.slug[0].split('_').reverse()[0]);
 
   const imageUrl =
     !(typeof event.image === 'string') && event.image ? event.image?.url : '';
@@ -44,6 +44,9 @@ async function EventPage({ params }: { params: { slug: string[] } }) {
     !(typeof event.image === 'string') && event.image ? event.image?.title : '';
   const locationName = !(typeof event.location === 'string')
     ? event.location.name
+    : '';
+  const locationCity = !(typeof event.location === 'string')
+    ? event.location.city
     : '';
 
   return (
@@ -58,8 +61,8 @@ async function EventPage({ params }: { params: { slug: string[] } }) {
       </div>
       <div>
         <Link
-          href={`/lieux/${slugifyString(locationName)}`}
-          className='text-center text-4xl font-bold text-black'
+          href={`/concerts/${locationCity}/${slugifyString(locationName)}`}
+          className='rounded-md p-2 text-center text-4xl font-bold text-black hover:bg-black hover:text-[#FFDCA8]'
         >
           {locationName}
         </Link>

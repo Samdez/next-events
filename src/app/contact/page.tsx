@@ -36,10 +36,10 @@ function ContactPage() {
       </p>
       <h1>Qui suis-je ?</h1>
       <p>
-        Musicien et développeur web, je suis toujours à l'affut des concerts et
-        bons plans au Pays Basque, il m'est donc tout naturellement venu à
-        l'esprit ce créer Goazen, afin de faire partager à un maximum de
-        personnes les évènements que je repérais.
+        Musicien et développeur web, je suis toujours à l&apos;affut des
+        concerts et bons plans au Pays Basque, il m&apos;est donc tout
+        naturellement venu à l&apos;esprit ce créer Goazen, afin de faire
+        partager à un maximum de personnes les évènements que je repérais.
       </p>
       <div className='flex w-full justify-evenly'>
         <Link
@@ -59,7 +59,7 @@ function ContactPage() {
       <div className='pt-8'>
         <h1>
           Si vous souhaitez voir vos concerts apparaître dans Goazen, faire une
-          suggestion ou une remarque, c'est ici :
+          suggestion ou une remarque, c&apos;est ici :
         </h1>
         <div className='w-full pb-8 text-center text-4xl'>👇</div>
         <ContactForm />

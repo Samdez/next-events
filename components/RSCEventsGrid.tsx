@@ -1,6 +1,5 @@
 import { fetchEvents } from '@/src/app/actions';
 import EventsGrid from './EventsGrid';
-import { auth } from '@clerk/nextjs';
 
 async function RSCEventsGrid({
   startDate,
@@ -11,7 +10,6 @@ async function RSCEventsGrid({
   endDate?: string;
   activeTime?: string;
 }) {
-  const { userId } = auth();
   const { events, hasNextPage } = await fetchEvents({
     startDate,
     endDate,
@@ -20,7 +18,6 @@ async function RSCEventsGrid({
   return (
     <EventsGrid
       initialEvents={events}
-      userId={userId}
       activeTime={activeTime}
       startDate={startDate}
       endDate={endDate}

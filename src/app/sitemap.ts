@@ -12,8 +12,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const locationCity =
       !(typeof event.location === 'string') &&
       event.location.city?.toLowerCase();
+    const locationName =
+      !(typeof event.location === 'string') &&
+      event.location.city?.toLowerCase();
     return {
-      url: `${baseUrl}/concerts/${locationCity}/${event.slug}_${event.id}`,
+      url: `${baseUrl}/concerts/${locationCity}/${locationName}/${event.slug}_${event.id}`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
@@ -28,8 +31,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   const locationsUrl = locations.map((loc) => {
+    const locationCity = !(typeof loc.city === 'string') && loc.city;
     return {
-      url: `${baseUrl}/lieux/${loc.slug}`,
+      url: `${baseUrl}/concerts/${locationCity}/${loc.slug}`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
@@ -42,12 +46,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
     },
     ...eventsUrls,
-    ...categoriesUrl,
     ...locationsUrl,
-    { url: `${baseUrl}/sign-in`, lastModified: new Date() },
-    { url: `${baseUrl}/sign-up`, lastModified: new Date() },
-    { url: `${baseUrl}/favoris`, lastModified: new Date() },
-    { url: `${baseUrl}/agenda`, lastModified: new Date() },
+    ...categoriesUrl,
+    // { url: `${baseUrl}/sign-in`, lastModified: new Date() },
+    // { url: `${baseUrl}/sign-up`, lastModified: new Date() },
+    // { url: `${baseUrl}/favoris`, lastModified: new Date() },
+    // { url: `${baseUrl}/agenda`, lastModified: new Date() },
     { url: `${baseUrl}/contact`, lastModified: new Date() },
   ];
 }

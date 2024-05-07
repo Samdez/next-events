@@ -7,8 +7,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function slugifyString(string: string) {
-  const slug = string.replace('/', '_');
-  return slugify(slug, { replacement: '_', lower: true, trim: true });
+  const slug = string.replace('/', '-');
+  return slugify(slug, { replacement: '-', lower: true, trim: true });
 }
 
 export function formatDate(date: string) {
