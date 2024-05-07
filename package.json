@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "ts-node ./src/kontent/generate-types",
     "db:migrate": "drizzle-kit generate:sqlite --schema=./src/db/schema.ts",
     "db:push": "drizzle-kit push:sqlite"
   },

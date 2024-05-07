@@ -38,7 +38,7 @@ export interface Event {
   date: string;
   time?: string | null;
   image?: string | Media | null;
-  location: string | Location;
+  location?: (string | null) | Location;
   category?: (string | Category)[] | null;
   genres?: string | null;
   price?: string | null;
@@ -59,6 +59,16 @@ export interface Media {
   filesize?: number | null;
   width?: number | null;
   height?: number | null;
+  sizes?: {
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 export interface Location {
   id: string;
@@ -69,7 +79,18 @@ export interface Location {
       }[]
     | null;
   place_id?: string | null;
-  city?: string | null;
+  city?:
+    | (
+        | 'biarritz'
+        | 'bayonne'
+        | 'anglet'
+        | 'capbreton'
+        | 'hossegor'
+        | 'seignosse'
+        | 'saint_jean_de_luz'
+        | 'hendaye'
+      )
+    | null;
   image?: string | Media | null;
   slug?: string | null;
   updatedAt: string;

@@ -11,10 +11,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const eventsUrls = events.events.map((event) => {
     const locationCity =
       !(typeof event.location === 'string') &&
-      event.location.city?.toLowerCase();
+      event.location?.city?.toLowerCase();
     const locationName =
       !(typeof event.location === 'string') &&
-      event.location.city?.toLowerCase();
+      event.location?.name?.toLowerCase();
     return {
       url: `${baseUrl}/concerts/${locationCity}/${locationName}/${event.slug}_${event.id}`,
       lastModified: new Date(),
@@ -22,6 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     };
   });
+  console.log('🚀 ~ eventsUrls ~ eventsUrls:', eventsUrls);
 
   const categoriesUrl = categories.map((cat) => {
     return {
@@ -31,7 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   const locationsUrl = locations.map((loc) => {
-    const locationCity = !(typeof loc.city === 'string') && loc.city;
+    const locationCity = typeof loc.city === 'string' && loc.city;
     return {
       url: `${baseUrl}/concerts/${locationCity}/${loc.slug}`,
       lastModified: new Date(),
@@ -39,6 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     };
   });
+  console.log('🚀 ~ locationsUrl ~ locationsUrl:', locationsUrl);
 
   return [
     {
