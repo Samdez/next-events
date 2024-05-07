@@ -9,20 +9,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const locations = await getLocations();
 
   const eventsUrls = events.events.map((event) => {
+    const locationSlug =
+      !(typeof event.location === 'string') && event.location?.slug;
     const locationCity =
       !(typeof event.location === 'string') &&
       event.location?.city?.toLowerCase();
-    const locationName =
-      !(typeof event.location === 'string') &&
-      event.location?.name?.toLowerCase();
     return {
-      url: `${baseUrl}/concerts/${locationCity}/${locationName}/${event.slug}_${event.id}`,
+      url: `${baseUrl}/concerts/${locationCity}/${locationSlug}/${event.slug}_${event.id}`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
     };
   });
-  console.log('🚀 ~ eventsUrls ~ eventsUrls:', eventsUrls);
 
   const categoriesUrl = categories.map((cat) => {
     return {
@@ -40,7 +38,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     };
   });
-  console.log('🚀 ~ locationsUrl ~ locationsUrl:', locationsUrl);
 
   return [
     {
@@ -50,10 +47,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...eventsUrls,
     ...locationsUrl,
     ...categoriesUrl,
-    // { url: `${baseUrl}/sign-in`, lastModified: new Date() },
-    // { url: `${baseUrl}/sign-up`, lastModified: new Date() },
-    // { url: `${baseUrl}/favoris`, lastModified: new Date() },
-    // { url: `${baseUrl}/agenda`, lastModified: new Date() },
     { url: `${baseUrl}/contact`, lastModified: new Date() },
   ];
 }

@@ -13,7 +13,7 @@ export async function generateMetadata({
     const event = await getEvent(params.slug[0].split('_').reverse()[0]);
     const locationCity =
       !(typeof event.location === 'string') &&
-      event.location.city?.toLowerCase();
+      event.location?.city?.toLowerCase();
     if (!event) {
       return {
         title: 'Not found',
@@ -43,10 +43,10 @@ async function EventPage({ params }: { params: { slug: string[] } }) {
   const imageTitle =
     !(typeof event.image === 'string') && event.image ? event.image?.title : '';
   const locationName = !(typeof event.location === 'string')
-    ? event.location.name
+    ? event.location?.name || ''
     : '';
   const locationCity = !(typeof event.location === 'string')
-    ? event.location.city
+    ? event.location?.city
     : '';
 
   return (

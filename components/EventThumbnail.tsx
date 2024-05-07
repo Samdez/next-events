@@ -23,11 +23,11 @@ function EventThumbnail({ event }: { event: Event }) {
         ? `${event.price} €`
         : 'N/A';
   const locationName =
-    !(typeof event.location === 'string') && event.location.name;
+    !(typeof event.location === 'string') && event.location?.name;
   const locationCity =
-    !(typeof event.location === 'string') && event.location.city;
+    !(typeof event.location === 'string') && event.location?.city;
   const locationSlug =
-    !(typeof event.location === 'string') && event.location.slug;
+    !(typeof event.location === 'string') && event.location?.slug;
 
   return (
     <Card className='relative h-[360px] rounded-xl border-black shadow-[15px_15px_0px_0px_rgba(0,0,0)]'>
