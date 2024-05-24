@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { slugifyString } from '@/lib/utils';
 import { getEvent } from '@/src/app/queries';
+import { useEffect } from 'react';
 
 export async function generateMetadata({
   params,

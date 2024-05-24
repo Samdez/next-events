@@ -24,7 +24,7 @@ export async function generateMetadata({
         location.description as unknown as Node[]
       ),
       alternates: {
-        canonical: `/lieux/${location.slug}`,
+        canonical: `/concerts/${location.city}/${location.slug}`,
       },
     };
   } catch (error) {
