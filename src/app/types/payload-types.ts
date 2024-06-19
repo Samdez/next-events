@@ -39,6 +39,7 @@ export interface Event {
   time?: string | null;
   image?: string | Media | null;
   location?: (string | null) | Location;
+  location_alt?: string | null;
   category?: (string | Category)[] | null;
   genres?: string | null;
   price?: string | null;

@@ -45,8 +45,14 @@ function EventThumbnail({ event }: { event: Event }) {
               {event.title}
             </CardTitle>
             <CardDescription className="text-md items-center justify-center rounded-md border-black font-['Public_Sans'] ">
-              <span className='text-[#ee2244bc]'>{locationName}</span> /{' '}
-              {locationCity}
+              {locationCity ? (
+                <>
+                  <span className='text-[#ee2244bc]'>{locationName}</span> /{' '}
+                  {locationCity}
+                </>
+              ) : (
+                event.location_alt
+              )}
             </CardDescription>
             {event.genres && (
               <CardDescription className="text-md items-center justify-center rounded-md border-black font-['Public_Sans'] text-black">
