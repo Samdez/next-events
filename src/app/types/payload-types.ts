@@ -82,14 +82,19 @@ export interface Location {
   place_id?: string | null;
   city?:
     | (
-        | 'biarritz'
-        | 'bayonne'
-        | 'anglet'
-        | 'capbreton'
-        | 'hossegor'
-        | 'seignosse'
-        | 'saint_jean_de_luz'
-        | 'hendaye'
+        | 'Biarritz'
+        | 'Bayonne'
+        | 'Anglet'
+        | 'Capbreton'
+        | 'Hossegor'
+        | 'Seignosse'
+        | 'Saint Jean de Luz'
+        | 'Hendaye'
+        | 'Bidart'
+        | 'Guethary'
+        | 'Angresse'
+        | 'Labenne'
+        | 'Soustons'
       )
     | null;
   image?: string | Media | null;
