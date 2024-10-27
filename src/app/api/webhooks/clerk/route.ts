@@ -1,6 +1,6 @@
 import { db } from '@/src/db/client';
 import { users } from '@/src/db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import type {
   DeletedObjectJSON,
   UserJSON,
@@ -20,12 +20,18 @@ export async function POST(request: Request) {
 }
 
 async function createUser(data: UserJSON) {
-  const { id, email_addresses } = data;
+  const { id, email_addresses, first_name, last_name } = data;
 
   try {
-    await db
-      .insert(users)
-      .values({ id, email: email_addresses[0].email_address });
+    await db.insert(users).values({
+      clerkId: id,
+      active: true,
+      email: email_addresses[0]?.email_address ?? null,
+      firstName: first_name ?? null,
+      lastName: last_name ?? null,
+      createdAt: sql`CURRENT_TIMESTAMP`,
+      updatedAt: sql`CURRENT_TIMESTAMP`,
+    });
   } catch (error: unknown) {
     if (error instanceof Error) throw new Error(error.message);
   }
@@ -40,7 +46,10 @@ async function deleteUser(data: DeletedObjectJSON) {
   if (!id) throw new Error('Missing id in webhook response');
 
   try {
-    await db.update(users).set({ active: false }).where(eq(users.id, id));
+    await db
+      .update(users)
+      .set({ active: false, updatedAt: sql`CURRENT_TIMESTAMP` })
+      .where(eq(users.clerkId, id));
   } catch (error: unknown) {
     if (error instanceof Error) throw new Error(error.message);
   }

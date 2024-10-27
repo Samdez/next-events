@@ -81,7 +81,6 @@ function EventsGrid({
         <PacmanLoader />
       </div>
     );
-  const favoritesIds = !isLoading && data?.data.map((fav: Event) => fav?.id);
 
   return events.length ? (
     <>

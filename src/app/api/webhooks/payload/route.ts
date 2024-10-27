@@ -1,6 +1,6 @@
 import { db } from '@/src/db/client';
 import { events } from '@/src/db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 interface PostRequestBody {
   eventId: string;
@@ -22,7 +22,11 @@ export async function DELETE(request: Request) {
 
 async function createEvent(id: string) {
   try {
-    await db.insert(events).values({ id });
+    await db.insert(events).values({
+      payloadId: id,
+      createdAt: sql`CURRENT_TIMESTAMP`,
+      updatedAt: sql`CURRENT_TIMESTAMP`,
+    });
   } catch (error: unknown) {
     if (error instanceof Error) throw new Error(error.message);
   }
@@ -34,7 +38,7 @@ async function createEvent(id: string) {
 
 async function deleteEvent(id: string) {
   try {
-    await db.delete(events).where(eq(events.id, id));
+    await db.delete(events).where(eq(events.payloadId, id));
   } catch (error: unknown) {
     if (error instanceof Error) throw new Error(error.message);
   }

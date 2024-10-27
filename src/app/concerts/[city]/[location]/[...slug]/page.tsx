@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { slugifyString } from '@/lib/utils';
 import { getEvent } from '@/src/app/queries';
-import { useEffect } from 'react';
 
 export async function generateMetadata({
   params,
@@ -68,6 +67,11 @@ async function EventPage({ params }: { params: { slug: string[] } }) {
           {locationName}
         </Link>
       </div>
+      <Link href={`/lagunak/${event.id}`}>
+        <Button className='rounded-lg border-4 border-black bg-[#ee2244bc] p-2 text-2xl text-black hover:bg-[#FFDCA8] hover:text-[#ee2244bc]'>
+          Trouver des amis avec qui y aller
+        </Button>
+      </Link>
       <Image
         className='mx-auto'
         src={imageUrl || ''}

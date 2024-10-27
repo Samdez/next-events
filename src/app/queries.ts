@@ -73,13 +73,6 @@ export async function getEvent(id: string): Promise<Event> {
   return res.json();
 }
 
-export async function getFavorites(id: string) {
-  const res = await db.query.usersOnEvents.findMany({
-    where: eq(usersOnEvents.userId, id),
-  });
-  return res.map((el) => el.eventId);
-}
-
 export async function getUserFavorites(userId: string) {
   const res = await db.query.users.findFirst({
     with: {
