@@ -12,7 +12,7 @@ interface DeleteRequestBody {
 export async function POST(request: Request) {
   const req = (await request.json()) as PostRequestBody;
 
-  return createEvent(req.eventId);
+  return createOrUpdateEvent(req.eventId);
 }
 export async function DELETE(request: Request) {
   const req = (await request.json()) as DeleteRequestBody;
@@ -20,13 +20,19 @@ export async function DELETE(request: Request) {
   return deleteEvent(req.eventId);
 }
 
-async function createEvent(id: string) {
+async function createOrUpdateEvent(id: string) {
   try {
-    await db.insert(events).values({
-      payloadId: id,
-      createdAt: sql`CURRENT_TIMESTAMP`,
-      updatedAt: sql`CURRENT_TIMESTAMP`,
-    });
+    await db
+      .insert(events)
+      .values({
+        payloadId: id,
+        createdAt: sql`CURRENT_TIMESTAMP`,
+        updatedAt: sql`CURRENT_TIMESTAMP`,
+      })
+      .onConflictDoUpdate({
+        target: events.id,
+        set: { payloadId: id, updatedAt: sql`CURRENT_TIMESTAMP` },
+      });
   } catch (error: unknown) {
     if (error instanceof Error) throw new Error(error.message);
   }

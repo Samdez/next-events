@@ -1,11 +1,11 @@
 'use server';
 
-import { eq } from 'drizzle-orm';
-import { db } from '../db/client';
 import { Category, Event, Location } from './types/payload-types';
 import qs from 'qs';
-import { users, usersOnEvents } from '../db/schema';
 import { env } from '@/env';
+import { db } from '../db/client';
+import { events, penas, users } from '../db/schema';
+import { eq, or, notExists, and, isNull } from 'drizzle-orm';
 
 function extendEndDateToEndOfDay(date: string) {
   return new Date(new Date(date).setUTCHours(24, 0, 0, 0));
@@ -71,16 +71,6 @@ export async function getEvents({
 export async function getEvent(id: string): Promise<Event> {
   const res = await fetch(`${env.NEXT_PUBLIC_PAYLOAD_URL}/api/events/${id}`);
   return res.json();
-}
-
-export async function getUserFavorites(userId: string) {
-  const res = await db.query.users.findFirst({
-    with: {
-      userEvents: { with: { event: true } },
-    },
-    where: eq(users.id, userId),
-  });
-  return res?.userEvents.map((userEvent) => userEvent.event);
 }
 
 export async function getCategories(): Promise<Category[]> {
@@ -175,4 +165,57 @@ export async function getLocationsByCity(
   const parsed = await res.json();
 
   return parsed.docs;
+}
+
+export async function getPenas(eventId: number) {
+  return db.select().from(penas).where(eq(penas.eventId, eventId));
+}
+
+export async function getUser(clerkId: string) {
+  return db
+    .select()
+    .from(users)
+    .where(eq(users.clerkId, clerkId))
+    .then((res) => res[0]);
+}
+
+export async function getEventFromDB(eventPayloadId: string) {
+  return db
+    .select()
+    .from(events)
+    .where(eq(events.payloadId, eventPayloadId))
+    .then((res) => res[0]);
+}
+
+export async function findPenaWithMissingMembers(eventId: number) {
+  return db
+    .select()
+    .from(penas)
+    .where(
+      and(
+        eq(penas.eventId, eventId),
+        or(
+          isNull(penas.memberFourId),
+          isNull(penas.memberThreeId),
+          isNull(penas.memberTwoId)
+        )
+      )
+    );
+}
+
+export async function findUserPena(userId: number, eventId: number) {
+  return db
+    .select()
+    .from(penas)
+    .where(
+      and(
+        eq(penas.eventId, eventId),
+        or(
+          eq(penas.memberOneId, userId),
+          eq(penas.memberTwoId, userId),
+          eq(penas.memberThreeId, userId),
+          eq(penas.memberFourId, userId)
+        )
+      )
+    );
 }

@@ -3,7 +3,6 @@ import {
   boolean,
   integer,
   pgTable,
-  time,
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
@@ -39,7 +38,7 @@ export const events = pgTable('events', {
 });
 
 export const penas = pgTable('penas', {
-  id: varchar('id').primaryKey(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
   memberOneId: integer('memberOneId').references(() => users.id),
   memberTwoId: integer('memberTwoId').references(() => users.id),
   memberThreeId: integer('memberThreeId').references(() => users.id),
