@@ -1,5 +1,6 @@
 import { fetchEvents } from '@/src/app/actions';
 import EventsGrid from './EventsGrid';
+import { fetchPlaceholderImage } from '@/src/app/queries';
 
 async function RSCEventsGrid({
   startDate,
@@ -14,6 +15,7 @@ async function RSCEventsGrid({
     startDate,
     endDate,
   });
+  const placeholderImage = await fetchPlaceholderImage();
 
   return (
     <EventsGrid
@@ -22,6 +24,7 @@ async function RSCEventsGrid({
       startDate={startDate}
       endDate={endDate}
       hasNextPageInitial={hasNextPage}
+      placeholderImageUrl={placeholderImage.ImagePlaceholder.url}
     />
   );
 }

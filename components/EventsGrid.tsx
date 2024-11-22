@@ -18,6 +18,7 @@ function EventsGrid({
   startDate,
   endDate,
   hasNextPageInitial,
+  placeholderImageUrl,
 }: {
   initialEvents: Event[];
   activeTime?: string;
@@ -25,6 +26,7 @@ function EventsGrid({
   startDate?: string;
   endDate?: string;
   hasNextPageInitial: boolean;
+  placeholderImageUrl: string;
 }) {
   const [_events, setEvents] = useState(initialEvents);
   const [page, setPage] = useState(1);
@@ -87,7 +89,13 @@ function EventsGrid({
     <>
       <div className='flex flex-wrap justify-around gap-24 px-12 pb-32'>
         {events.map((event, i) => {
-          return <EventThumbnail event={event} key={event.id} />;
+          return (
+            <EventThumbnail
+              event={event}
+              key={event.id}
+              placeholderImageUrl={placeholderImageUrl}
+            />
+          );
         })}
       </div>
       {hasNextPage && (

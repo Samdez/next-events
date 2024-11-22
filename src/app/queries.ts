@@ -1,7 +1,7 @@
 'use server';
 
 import { eq } from 'drizzle-orm';
-import { db } from '../db/client';
+// import { db } from '../db/client';
 import { Category, Event, Location } from './types/payload-types';
 import qs from 'qs';
 import { users, usersOnEvents } from '../db/schema';
@@ -73,22 +73,22 @@ export async function getEvent(id: string): Promise<Event> {
   return res.json();
 }
 
-export async function getFavorites(id: string) {
-  const res = await db.query.usersOnEvents.findMany({
-    where: eq(usersOnEvents.userId, id),
-  });
-  return res.map((el) => el.eventId);
-}
+// export async function getFavorites(id: string) {
+//   const res = await db.query.usersOnEvents.findMany({
+//     where: eq(usersOnEvents.userId, id),
+//   });
+//   return res.map((el) => el.eventId);
+// }
 
-export async function getUserFavorites(userId: string) {
-  const res = await db.query.users.findFirst({
-    with: {
-      userEvents: { with: { event: true } },
-    },
-    where: eq(users.id, userId),
-  });
-  return res?.userEvents.map((userEvent) => userEvent.event);
-}
+// export async function getUserFavorites(userId: string) {
+//   const res = await db.query.users.findFirst({
+//     with: {
+//       userEvents: { with: { event: true } },
+//     },
+//     where: eq(users.id, userId),
+//   });
+//   return res?.userEvents.map((userEvent) => userEvent.event);
+// }
 
 export async function getCategories(): Promise<Category[]> {
   const res = await fetch(
@@ -182,4 +182,12 @@ export async function getLocationsByCity(
   const parsed = await res.json();
 
   return parsed.docs;
+}
+
+export async function fetchPlaceholderImage() {
+  const res = await fetch(
+    `${env.NEXT_PUBLIC_PAYLOAD_URL}/api/globals/image-placeholder`
+  );
+
+  return res.json();
 }

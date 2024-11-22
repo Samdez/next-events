@@ -10,9 +10,17 @@ import { Event } from '@/src/app/types/payload-types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-function EventThumbnail({ event }: { event: Event }) {
+function EventThumbnail({
+  event,
+  placeholderImageUrl,
+}: {
+  event: Event;
+  placeholderImageUrl: string;
+}) {
   const imageUrl =
-    !(typeof event.image === 'string') && event.image ? event.image?.url : '';
+    !(typeof event.image === 'string') && event.image
+      ? event.image?.url
+      : placeholderImageUrl;
   const imageTitle =
     !(typeof event.image === 'string') && event.image ? event.image?.title : '';
   const eventPrice = event.sold_out
