@@ -8,6 +8,7 @@ import {
 import { auth } from '@clerk/nextjs/server';
 import CreatePena from '@/components/CreatePena';
 import { UserHasNoPena } from './UserHasNoPena';
+import UserHasPena from './UserHasPena';
 
 async function LagunakPage({ params }: { params: { id: string } }) {
   const { userId } = await auth();
@@ -28,7 +29,7 @@ async function LagunakPage({ params }: { params: { id: string } }) {
 
   const userPena = await findUserPena(user.id, eventFromDB.id);
   if (userPena.length) {
-    return <UserHasPena penaId={userPena[0].id} />;
+    return <UserHasPena penaId={userPena[0].id} eventId={eventFromDB.id} />;
   }
 
   const missingMembersPenas = await findPenaWithMissingMembers(eventFromDB.id);
@@ -55,10 +56,6 @@ function NoExistingPenas({
       <CreatePena userId={userId} eventId={eventId} />
     </div>
   );
-}
-
-function UserHasPena({ penaId }: { penaId: number }) {
-  return <div>Vous faites partie de la pena {penaId}</div>;
 }
 
 export default LagunakPage;
