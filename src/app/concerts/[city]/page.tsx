@@ -1,8 +1,9 @@
 import EventsGrid from '@/components/EventsGrid';
-import { getEvents, getLocations } from '../../queries';
+import { fetchPlaceholderImage, getEvents, getLocations } from '../../queries';
 
 async function CityPage({ params }: { params: { city: string } }) {
   const locations = await getLocations(params.city);
+  const placeholderImageUrl = await fetchPlaceholderImage();
   const events = await Promise.all(
     locations.map((location) => {
       return getEvents({
@@ -16,6 +17,7 @@ async function CityPage({ params }: { params: { city: string } }) {
     <EventsGrid
       initialEvents={events.flatMap((e) => e.events)}
       hasNextPageInitial={false}
+      placeholderImageUrl={placeholderImageUrl}
     />
   );
 }

@@ -2,7 +2,11 @@ import Image from 'next/image';
 import { env } from '@/env';
 import EventsCarousel from '@/components/EventsCarousel';
 import { serializeRichText } from '@/lib/serializeRichText';
-import { getLocation, getEvents } from '@/src/app/queries';
+import {
+  getLocation,
+  getEvents,
+  fetchPlaceholderImage,
+} from '@/src/app/queries';
 import { Node } from 'slate';
 
 export async function generateMetadata({
@@ -49,6 +53,7 @@ async function LocationPage({
     locationId: location.id,
     startDate: new Date().toISOString(),
   });
+  const placeholderImageUrl = await fetchPlaceholderImage();
   const imageUrl =
     !(typeof location?.image === 'string') && location.image
       ? location.image?.url
@@ -61,7 +66,10 @@ async function LocationPage({
       </h1>
       <h2 className='text-4xl text-black'>Prochains concerts: </h2>
       {events.length ? (
-        <EventsCarousel events={events} />
+        <EventsCarousel
+          events={events}
+          placeholderImageUrl={placeholderImageUrl}
+        />
       ) : (
         <div className='flex h-36 items-center'>
           <p className='text-4l text-black'>

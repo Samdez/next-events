@@ -14,9 +14,11 @@ import EventThumbnail from './EventThumbnail';
 function EventsCarousel({
   events,
   userId,
+  placeholderImageUrl,
 }: {
   events: Event[];
   userId?: string | null;
+  placeholderImageUrl: string;
 }) {
   const { isLoading, data } = useQuery({
     queryKey: ['favorites'],
@@ -38,7 +40,10 @@ function EventsCarousel({
         {events.map((event) => {
           return (
             <CarouselItem key={event.id} className='md:basis-1/3'>
-              <EventThumbnail event={event} />
+              <EventThumbnail
+                event={event}
+                placeholderImageUrl={placeholderImageUrl}
+              />
             </CarouselItem>
           );
         })}

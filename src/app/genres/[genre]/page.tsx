@@ -1,5 +1,5 @@
 import EventsGrid from '@/components/EventsGrid';
-import { getCategories, getEvents } from '../../queries';
+import { fetchPlaceholderImage, getCategories, getEvents } from '../../queries';
 import { searchParamsSchema } from '@/src/schemas/searchParams';
 import FilterSection from '@/components/FilterSection';
 
@@ -18,7 +18,7 @@ async function Genre({
   } = searchParamsSchema.parse(searchParams);
 
   const categories = await getCategories();
-
+  const placeholderImageUrl = await fetchPlaceholderImage();
   const { events, hasNextPage } = await getEvents({
     category: genre,
     startDate,
@@ -34,6 +34,7 @@ async function Genre({
         startDate={startDate}
         endDate={endDate}
         activeTime={activeTime}
+        placeholderImageUrl={placeholderImageUrl}
       />
       ;
     </>

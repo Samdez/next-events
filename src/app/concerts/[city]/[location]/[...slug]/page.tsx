@@ -2,8 +2,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { slugifyString } from '@/lib/utils';
-import { getEvent } from '@/src/app/queries';
-import { useEffect } from 'react';
+import { fetchPlaceholderImage, getEvent } from '@/src/app/queries';
 
 export async function generateMetadata({
   params,
@@ -38,9 +37,12 @@ export async function generateMetadata({
 
 async function EventPage({ params }: { params: { slug: string[] } }) {
   const event = await getEvent(params.slug[0].split('_').reverse()[0]);
+  const placeholderImage = await fetchPlaceholderImage();
 
   const imageUrl =
-    !(typeof event.image === 'string') && event.image ? event.image?.url : '';
+    !(typeof event.image === 'string') && event.image
+      ? event.image?.url
+      : placeholderImage.ImagePlaceholder.url;
   const imageTitle =
     !(typeof event.image === 'string') && event.image ? event.image?.title : '';
   const locationName = !(typeof event.location === 'string')
