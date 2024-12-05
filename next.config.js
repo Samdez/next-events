@@ -21,6 +21,15 @@ const nextConfig = {
     locales: ['fr'],
     defaultLocale: 'fr',
   },
+  async redirects() {
+    return [
+      {
+        source: '/agenda',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
